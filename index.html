@@ -6,10 +6,14 @@
     <title>Nautilus AI Enterprise - Plataforma Avanzada con IA, Satélite, IoT y 5G</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <style>
         :root {
             --primary-dark: #0a1f3a;
@@ -36,6 +40,7 @@
             --gradient-iot: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             --gradient-5g: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
             --gradient-neural: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
+            --gradient-ocean: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
             --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         }
@@ -351,6 +356,11 @@
             padding: 70px 0;
             width: 100%;
         }
+
+        .section-bg {
+            background: linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f1f5f9" width="100" height="100"/><path d="M0 0L100 100" stroke="%23e2e8f0" stroke-width="1"/></svg>');
+            background-size: 300px;
+        }
         
         .section-title {
             text-align: center;
@@ -660,6 +670,38 @@
             border-radius: 15px;
         }
         
+        .map-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+        
+        .map-layer-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light-bg);
+            border: 2px solid #e5e7eb;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .map-layer-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .map-layer-btn:hover {
+            transform: translateY(-2px);
+        }
+        
         .tech-controls {
             display: flex;
             flex-wrap: wrap;
@@ -883,6 +925,10 @@
             .results-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
+            
+            .map-controls {
+                justify-content: flex-start;
+            }
         }
         
         @media (min-width: 1024px) {
@@ -935,6 +981,10 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .map-container {
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -964,7 +1014,22 @@
         <div class="container header-content">
             <div class="logo">
                 <div class="logo-img">
-                    <img src="https://via.placeholder.com/200x60/1e4dd8/ffffff?text=NAUTILUS+AI" alt="Nautilus AI Logo">
+                    <!-- Logo con cerebro, ondas de satélite y barco -->
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5C16 5 12.5 7 10.5 10C8.5 13 8 16.5 8 20C8 23.5 8.5 27 10.5 30C12.5 33 16 35 20 35C24 35 27.5 33 29.5 30C31.5 27 32 23.5 32 20C32 16.5 31.5 13 29.5 10C27.5 7 24 5 20 5Z" fill="#1e4dd8"/>
+                        <path d="M20 8C23 8 25.5 9.5 27 12C28.5 14.5 29 17.5 29 20C29 22.5 28.5 25.5 27 28C25.5 30.5 23 32 20 32C17 32 14.5 30.5 13 28C11.5 25.5 11 22.5 11 20C11 17.5 11.5 14.5 13 12C14.5 9.5 17 8 20 8Z" fill="#0a1f3a"/>
+                        <path d="M20 12C21.5 12 22.5 13 23 14.5C23.5 16 23.5 17.5 23 19C22.5 20.5 21.5 21.5 20 21.5C18.5 21.5 17.5 20.5 17 19C16.5 17.5 16.5 16 17 14.5C17.5 13 18.5 12 20 12Z" fill="white"/>
+                        <path d="M15 7C14 8 13.5 9.5 13.5 11C13.5 12.5 14 14 15 15C16 16 17.5 16.5 19 16.5C20.5 16.5 22 16 23 15C24 14 24.5 12.5 24.5 11C24.5 9.5 24 8 23 7C22 6 20.5 5.5 19 5.5C17.5 5.5 16 6 15 7Z" fill="#08c792"/>
+                        <path d="M5 20C5 19 6 18 7 18C8 18 9 19 9 20C9 21 8 22 7 22C6 22 5 21 5 20Z" fill="#8b5cf6"/>
+                        <path d="M31 20C31 19 32 18 33 18C34 18 35 19 35 20C35 21 34 22 33 22C32 22 31 21 31 20Z" fill="#8b5cf6"/>
+                        <path d="M20 5C20 4 21 3 22 3C23 3 24 4 24 5C24 6 23 7 22 7C21 7 20 6 20 5Z" fill="#8b5cf6"/>
+                        <path d="M20 33C20 32 21 31 22 31C23 31 24 32 24 33C24 34 23 35 22 35C21 35 20 34 20 33Z" fill="#8b5cf6"/>
+                        <path d="M10 10C10 9 11 8 12 8C13 8 14 9 14 10C14 11 13 12 12 12C11 12 10 11 10 10Z" fill="#8b5cf6"/>
+                        <path d="M26 26C26 25 27 24 28 24C29 24 30 25 30 26C30 27 29 28 28 28C27 28 26 27 26 26Z" fill="#8b5cf6"/>
+                        <path d="M10 30C10 29 11 28 12 28C13 28 14 29 14 30C14 31 13 32 12 32C11 32 10 31 10 30Z" fill="#8b5cf6"/>
+                        <path d="M26 14C26 13 27 12 28 12C29 12 30 13 30 14C30 15 29 16 28 16C27 16 26 15 26 14Z" fill="#8b5cf6"/>
+                        <path d="M18 25L16 28L20 30L24 28L22 25L20 26L18 25Z" fill="#fbbf24"/>
+                    </svg>
                 </div>
                 <span>Nautilus AI</span>
             </div>
@@ -1005,7 +1070,7 @@
     </section>
 
     <!-- Sección de Tecnologías -->
-    <section class="tech-services" id="tecnologias">
+    <section class="tech-services section-bg" id="tecnologias">
         <div class="container">
             <div class="section-title">
                 <h2>Tecnologías Integradas de Vanguardia</h2>
@@ -1015,7 +1080,7 @@
             <div class="tech-grid">
                 <div class="tech-card satellite">
                     <div class="tech-icon">
-                        <i class="fas fa-satellite"></i>
+                        <i class="fas fa-satellite-dish"></i>
                     </div>
                     <h3>Datos Satelitales</h3>
                     <p>Integración con APIs de satélites para monitoreo en tiempo real de condiciones oceánicas y meteorológicas</p>
@@ -1029,7 +1094,7 @@
                 
                 <div class="tech-card iot">
                     <div class="tech-icon">
-                        <i class="fas fa-sensor"></i>
+                        <i class="fas fa-microchip"></i>
                     </div>
                     <h3>Internet de las Cosas</h3>
                     <p>Sensores IoT para monitoreo en tiempo real de condiciones de buques, carga y variables ambientales</p>
@@ -1043,7 +1108,7 @@
                 
                 <div class="tech-card g5">
                     <div class="tech-icon">
-                        <i class="fas fa-tower-cell"></i>
+                        <i class="fas fa-tower-broadcast"></i>
                     </div>
                     <h3>Conectividad 5G</h3>
                     <p>Comunicación ultrarrápida y de baja latencia para transmisión de datos en tiempo real en alta mar</p>
@@ -1057,7 +1122,7 @@
                 
                 <div class="tech-card neural">
                     <div class="tech-icon">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-robot"></i>
                     </div>
                     <h3>IA Avanzada</h3>
                     <p>Redes neuronales profundas para análisis predictivo y optimización inteligente de operaciones</p>
@@ -1130,7 +1195,7 @@
                 </div>
                 
                 <div class="dashboard-card">
-                    <i class="fas fa-bolt"></i>
+                    <i class="fas fa-ship"></i>
                     <h3>Gestión de Flotas</h3>
                     <p>Sistema integral para monitoreo y optimización de flotas marítimas en tiempo real</p>
                     <div class="stats-grid">
@@ -1157,7 +1222,7 @@
     </section>
 
     <!-- Demo Interactiva -->
-    <section class="demo" id="demo">
+    <section class="demo section-bg" id="demo">
         <div class="container">
             <div class="section-title">
                 <h2>Demo Interactiva - Simulador de Rutas</h2>
@@ -1203,6 +1268,28 @@
                     </div>
                 </div>
                 
+                <div class="map-controls">
+                    <button class="map-layer-btn active" data-layer="osm">
+                        <i class="fas fa-map"></i> OpenStreetMap
+                    </button>
+                    <button class="map-layer-btn" data-layer="satellite">
+                        <i class="fas fa-satellite"></i> Satélite
+                    </button>
+                    <button class="map-layer-btn" data-layer="traffic">
+                        <i class="fas fa-ship"></i> Tráfico Marítimo
+                    </button>
+                    <button class="map-layer-btn" data-layer="weather">
+                        <i class="fas fa-cloud-sun-rain"></i> Meteorología
+                    </button>
+                    <button class="map-layer-btn" data-layer="currents">
+                        <i class="fas fa-water"></i> Corrientes
+                    </button>
+                </div>
+                
+                <div class="map-container">
+                    <div id="demo-map"></div>
+                </div>
+                
                 <div class="tech-controls">
                     <button class="tech-toggle" id="toggle-satellite">
                         <i class="fas fa-satellite"></i> Vista Satelital
@@ -1218,10 +1305,6 @@
                 <button class="btn-enterprise" id="calculate-btn">
                     <i class="fas fa-calculator"></i> Calcular Optimización
                 </button>
-                
-                <div class="map-container">
-                    <div id="demo-map"></div>
-                </div>
                 
                 <div class="results-grid">
                     <div class="result-card">
@@ -1287,7 +1370,6 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // Inicialización cuando el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', function() {
@@ -1303,6 +1385,9 @@
             initializeChart();
             initParticles();
         });
+        
+        // Variables globales para el mapa y capas
+        let demoMap, mapLayers = {}, currentLayer = 'osm', markers = L.markerClusterGroup();
         
         function initializePlatform() {
             // Aquí inicializaremos todas las funcionalidades de la plataforma
@@ -1364,79 +1449,348 @@
             document.getElementById('vessel-type').addEventListener('change', updateResults);
             document.getElementById('weather-conditions').addEventListener('change', updateResults);
             
+            // Configurar botones de capas del mapa
+            document.querySelectorAll('.map-layer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const layer = this.getAttribute('data-layer');
+                    switchMapLayer(layer);
+                    
+                    // Actualizar estado activo de los botones
+                    document.querySelectorAll('.map-layer-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
             // Inicializar mapa
             initializeDemoMap();
         }
         
         function initializeDemoMap() {
             // Inicializar el mapa de demostración
-            const demoMap = L.map('demo-map').setView([25, 0], 2);
+            demoMap = L.map('demo-map', {
+                zoomControl: false,
+                minZoom: 2,
+                maxBounds: [[-90, -180], [90, 180]],
+                maxBoundsViscosity: 1.0
+            }).setView([25, 0], 2);
             
-            // Configuración de mapa
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 18
+            // Añadir control de zoom
+            L.control.zoom({
+                position: 'topright'
             }).addTo(demoMap);
             
-            // Añadir capa de satélite (se activará con el botón)
-            const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '© Esri',
-                maxZoom: 18
+            // Configuración de capas base
+            mapLayers.osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
             });
             
-            // Configurar botones de control
-            document.getElementById('toggle-satellite').addEventListener('click', function() {
-                if (demoMap.hasLayer(satelliteLayer)) {
-                    demoMap.removeLayer(satelliteLayer);
-                    this.innerHTML = '<i class="fas fa-satellite"></i> Vista Satelital';
-                } else {
-                    demoMap.addLayer(satelliteLayer);
-                    this.innerHTML = '<i class="fas fa-satellite"></i> Vista Mapa';
-                }
+            mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '© Esri',
+                maxZoom: 19
             });
+            
+            // Capa de tráfico marítimo (simulada con marcadores)
+            mapLayers.traffic = L.layerGroup();
+            
+            // Capa de condiciones meteorológicas (simulada)
+            mapLayers.weather = L.layerGroup();
+            
+            // Capa de corrientes marinas (simulada)
+            mapLayers.currents = L.layerGroup();
+            
+            // Añadir capa base por defecto
+            mapLayers.osm.addTo(demoMap);
+            currentLayer = 'osm';
+            
+            // Añadir marcadores de ejemplo (puertos importantes)
+            const majorPorts = [
+                {name: "Singapur", lat: 1.27, lng: 103.83, type: "asia"},
+                {name: "Shanghái", lat: 31.23, lng: 121.47, type: "asia"},
+                {name: "Róterdam", lat: 51.92, lng: 4.48, type: "europe"},
+                {name: "Hamburgo", lat: 53.55, lng: 9.99, type: "europe"},
+                {name: "Los Ángeles", lat: 33.75, lng: -118.24, type: "america"},
+                {name: "Nueva York", lat: 40.71, lng: -74.01, type: "america"}
+            ];
+            
+            majorPorts.forEach(port => {
+                const marker = L.marker([port.lat, port.lng], {
+                    icon: L.divIcon({
+                        className: `port-marker port-${port.type}`,
+                        html: `<i class="fas fa-anchor"></i>`,
+                        iconSize: [30, 30]
+                    })
+                }).bindPopup(`<strong>${port.name}</strong><br>Puerto principal`);
+                
+                markers.addLayer(marker);
+            });
+            
+            demoMap.addLayer(markers);
             
             // Añadir rutas de ejemplo
-            addDemoRoutes(demoMap);
+            addDemoRoutes();
+            
+            // Añadir leyenda
+            const legend = L.control({position: 'bottomright'});
+            legend.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'map-legend');
+                div.innerHTML = `
+                    <h4>Leyenda</h4>
+                    <div><span class="legend-icon port-asia"></span> Puertos Asia</div>
+                    <div><span class="legend-icon port-europe"></span> Puertos Europa</div>
+                    <div><span class="legend-icon port-america"></span> Puertos América</div>
+                    <div><span class="legend-icon route-optimized"></span> Ruta Optimizada</div>
+                    <div><span class="legend-icon route-standard"></span> Ruta Estándar</div>
+                `;
+                return div;
+            };
+            legend.addTo(demoMap);
+            
+            // Añadir estilo a la leyenda
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .map-legend {
+                    background: white;
+                    padding: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                }
+                .map-legend h4 {
+                    margin: 0 0 10px;
+                }
+                .map-legend div {
+                    margin-bottom: 5px;
+                    display: flex;
+                    align-items: center;
+                }
+                .legend-icon {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 8px;
+                    border-radius: 50%;
+                }
+                .port-asia { background: #ef4444; }
+                .port-europe { background: #3b82f6; }
+                .port-america { background: #10b981; }
+                .route-optimized { 
+                    background: linear-gradient(to right, transparent 50%, #08c792 50%);
+                    border-radius: 0;
+                }
+                .route-standard { 
+                    background: linear-gradient(to right, transparent 50%, #6b7280 50%);
+                    border-radius: 0;
+                }
+                .port-marker {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    color: white;
+                    font-size: 14px;
+                    text-align: center;
+                }
+                .port-asia { background-color: #ef4444; }
+                .port-europe { background-color: #3b82f6; }
+                .port-america { background-color: #10b981; }
+            `;
+            document.head.appendChild(style);
         }
         
-        function addDemoRoutes(map) {
+        function switchMapLayer(layer) {
+            // Remover capa actual
+            if (mapLayers[currentLayer]) {
+                if (currentLayer === 'osm' || currentLayer === 'satellite') {
+                    demoMap.removeLayer(mapLayers[currentLayer]);
+                } else {
+                    mapLayers[currentLayer].removeFrom(demoMap);
+                }
+            }
+            
+            // Añadir nueva capa
+            if (layer === 'osm' || layer === 'satellite') {
+                mapLayers[layer].addTo(demoMap);
+            } else {
+                // Para capas especiales, añadir y generar datos
+                mapLayers[layer].addTo(demoMap);
+                generateLayerData(layer);
+            }
+            
+            currentLayer = layer;
+        }
+        
+        function generateLayerData(layer) {
+            // Limpiar capa primero
+            mapLayers[layer].clearLayers();
+            
+            if (layer === 'traffic') {
+                // Generar tráfico marítimo simulado
+                for (let i = 0; i < 20; i++) {
+                    const lat = 20 + Math.random() * 40;
+                    const lng = -100 + Math.random() * 120;
+                    
+                    const shipIcon = L.divIcon({
+                        className: 'ship-marker',
+                        html: '<i class="fas fa-ship"></i>',
+                        iconSize: [24, 24]
+                    });
+                    
+                    const shipMarker = L.marker([lat, lng], {icon: shipIcon})
+                        .bindPopup('Embarcación<br>Velocidad: ' + (10 + Math.random() * 20).toFixed(1) + ' nudos');
+                    
+                    mapLayers.traffic.addLayer(shipMarker);
+                }
+            } else if (layer === 'weather') {
+                // Generar datos meteorológicos simulados
+                const weatherData = [
+                    {lat: 35, lng: -40, type: 'storm', name: 'Tormenta'},
+                    {lat: 20, lng: -60, type: 'cloud', name: 'Nublado'},
+                    {lat: 10, lng: 30, type: 'sun', name: 'Soleado'},
+                    {lat: -10, lng: 80, type: 'rain', name: 'Lluvia'}
+                ];
+                
+                weatherData.forEach(data => {
+                    const weatherIcon = L.divIcon({
+                        className: `weather-marker weather-${data.type}`,
+                        html: `<i class="fas fa-${data.type === 'storm' ? 'poo-storm' : data.type === 'cloud' ? 'cloud' : data.type === 'rain' ? 'cloud-rain' : 'sun'}"></i>`,
+                        iconSize: [30, 30]
+                    });
+                    
+                    const marker = L.marker([data.lat, data.lng], {icon: weatherIcon})
+                        .bindPopup(`<strong>${data.name}</strong>`);
+                    
+                    mapLayers.weather.addLayer(marker);
+                });
+            } else if (layer === 'currents') {
+                // Generar corrientes marinas simuladas
+                const currentData = [
+                    {lat: 25, lng: -60, direction: 'north', strength: 'fuerte'},
+                    {lat: 0, lng: -30, direction: 'west', strength: 'moderada'},
+                    {lat: -25, lng: 10, direction: 'south', strength: 'suave'},
+                    {lat: 40, lng: 160, direction: 'east', strength: 'fuerte'}
+                ];
+                
+                currentData.forEach(data => {
+                    const currentIcon = L.divIcon({
+                        className: `current-marker current-${data.direction}`,
+                        html: `<i class="fas fa-arrow-${data.direction}"></i>`,
+                        iconSize: [24, 24]
+                    });
+                    
+                    const marker = L.marker([data.lat, data.lng], {icon: currentIcon})
+                        .bindPopup(`<strong>Corriente ${data.strength}</strong><br>Dirección: ${data.direction}`);
+                    
+                    mapLayers.currents.addLayer(marker);
+                });
+            }
+            
+            // Añadir estilo para los marcadores
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .ship-marker {
+                    color: #3b82f6;
+                    font-size: 18px;
+                    text-align: center;
+                }
+                .weather-marker {
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 16px;
+                }
+                .weather-storm { background-color: #6366f1; }
+                .weather-cloud { background-color: #9ca3af; }
+                .weather-rain { background-color: #60a5fa; }
+                .weather-sun { background-color: #f59e0b; }
+                .current-marker {
+                    background-color: #0891b2;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 14px;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function addDemoRoutes() {
             // Rutas de ejemplo para la demo
             const routes = {
-                'asia-europe': [
-                    [1.35, 103.8], [5.41, 100.33], [13.75, 100.48],
-                    [25.07, 121.56], [35.67, 139.65], [36.12, -5.37], [51.92, 4.48]
-                ],
-                'america-europe': [
-                    [40.71, -74.01], [43.65, -79.38], [51.51, -0.12],
-                    [53.55, 9.99], [55.68, 12.57]
-                ],
-                'asia-america': [
-                    [31.23, 121.47], [35.67, 139.65], [37.77, -122.41],
-                    [34.05, -118.24], [32.72, -117.16]
-                ],
-                'transpacific': [
-                    [35.68, 139.76], [37.77, -122.41], [34.05, -118.24],
-                    [32.72, -117.16], [47.61, -122.34]
-                ]
+                'asia-europe': {
+                    optimized: [
+                        [1.35, 103.8], [5.41, 100.33], [13.75, 100.48],
+                        [25.07, 121.56], [35.67, 139.65], [36.12, -5.37], [51.92, 4.48]
+                    ],
+                    standard: [
+                        [1.35, 103.8], [10, 90], [20, 60], [30, 30], 
+                        [40, 0], [45, -10], [51.92, 4.48]
+                    ]
+                },
+                'america-europe': {
+                    optimized: [
+                        [40.71, -74.01], [43.65, -79.38], [51.51, -0.12],
+                        [53.55, 9.99], [55.68, 12.57]
+                    ],
+                    standard: [
+                        [40.71, -74.01], [45, -40], [50, -20], [53, 0],
+                        [55.68, 12.57]
+                    ]
+                },
+                'asia-america': {
+                    optimized: [
+                        [31.23, 121.47], [35.67, 139.65], [37.77, -122.41],
+                        [34.05, -118.24], [32.72, -117.16]
+                    ],
+                    standard: [
+                        [31.23, 121.47], [35, 160], [40, -160], [37, -125],
+                        [32.72, -117.16]
+                    ]
+                },
+                'transpacific': {
+                    optimized: [
+                        [35.68, 139.76], [37.77, -122.41], [34.05, -118.24],
+                        [32.72, -117.16], [47.61, -122.34]
+                    ],
+                    standard: [
+                        [35.68, 139.76], [40, -170], [45, -150], [47.61, -122.34]
+                    ]
+                }
             };
             
             // Añadir polyline para la ruta actual
             const currentRoute = routes['asia-europe'];
-            const polyline = L.polyline(currentRoute, {
-                color: '#1e4dd8',
+            
+            // Ruta optimizada
+            const polylineOptimized = L.polyline(currentRoute.optimized, {
+                color: '#08c792',
                 weight: 5,
                 opacity: 0.9,
                 smoothFactor: 1
-            }).addTo(map);
+            }).addTo(demoMap);
+            
+            // Ruta estándar
+            const polylineStandard = L.polyline(currentRoute.standard, {
+                color: '#6b7280',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '10, 10',
+                smoothFactor: 1
+            }).addTo(demoMap);
             
             // Ajustar la vista para mostrar la ruta
-            map.fitBounds(polyline.getBounds());
+            demoMap.fitBounds(polylineOptimized.getBounds());
         }
         
         function updateDemoMap() {
             // Actualizar el mapa según la ruta seleccionada
-            console.log("Actualizando mapa con nueva ruta");
-            // En una implementación real, aquí se actualizaría el mapa
+            const route = document.getElementById('route-select').value;
+            console.log("Actualizando mapa con ruta: " + route);
+            
+            // En una implementación real, aquí se actualizaría el mapa con la nueva ruta
         }
         
         function calculateOptimization() {
