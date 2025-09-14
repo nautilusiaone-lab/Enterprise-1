@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nautilus AI - Revolucionando la Logística Marítima con IA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a1f3a;
+            --primary: #1e4dd8;
+            --primary-light: #e0eaff;
+            --accent: #08c792;
+            --accent-dark: #06a57d;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --carbon: #0d9488;
+            --premium: #7c3aed;
+            --enterprise: #1e3a8a;
+            --gold: #fbbf24;
+            --satellite: #8b5cf6;
+            --iot: #3b82f6;
+            --5g: #ef4444;
+            --text-dark: #111827;
+            --text-light: #f9fafb;
+            --gray: #6b7280;
+            --light-bg: #f8fafc;
+            --gradient-enterprise: linear-gradient(135deg, #0a1f3a 0%, #1e3a8a 50%, #1e4dd8 100%);
+            --gradient-satellite: linear-gradient(135deg, #8b5cf6 0%, #4c1d95 100%);
+            --gradient-iot: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --gradient-5g: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            --gradient-neural: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
+            --gradient-ocean: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--light-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--enterprise);
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .cta-button {
+            background: var(--gradient-enterprise);
+            color: white !important;
+            padding: 12px 24px !important;
+            border-radius: 15px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.4);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.5);
+        }
+        
+        /* Hero Section */
+        .hero-launch {
+            padding: 120px 0 80px;
+            background: linear-gradient(112deg, rgba(10, 31, 58, 0.92) 0%, rgba(30, 58, 138, 0.95) 100%), url('https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            background: var(--gradient-satellite);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero-launch h1 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: 900;
+        }
+        
+        .hero-launch p {
+            font-size: 1.2rem;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px;
+            background: var(--gradient-enterprise);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 800;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn-launch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.5);
+        }
+        
+        .btn-launch i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .btn-outline-white {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+        
+        /* Secciones generales */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-bg {
+            background: linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f1f5f9" width="100" height="100"/><path d="M0 0L100 100" stroke="%23e2e8f0" stroke-width="1"/></svg>');
+            background-size: 300px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Tarjetas de características */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-2xl);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-satellite);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-3xl);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-enterprise);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Registro */
+        .registration-section {
+            background: var(--gradient-enterprise);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .registration-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .registration-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 20px;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* Formulario de contacto */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-3xl);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(8, 199, 146, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient-enterprise);
+            color: white;
+            padding: 70px 0 30px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        
+        .footer-column p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-img">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5C16 5 12.5 7 10.5 10C8.5 13 8 16.5 8 20C8 23.5 8.5 27 10.5 30C12.5 33 16 35 20 35C24 35 27.5 33 29.5 30C31.5 27 32 23.5 32 20C32 16.5 31.5 13 29.5 10C27.5 7 24 5 20 5Z" fill="#1e4dd8"/>
+                        <path d="M20 8C23 8 25.5 9.5 27 12C28.5 14.5 29 17.5 29 20C29 22.5 28.5 25.5 27 28C25.5 30.5 23 32 20 32C17 32 14.5 30.5 13 28C11.5 25.5 11 22.5 11 20C11 17.5 11.5 14.5 13 12C14.5 9.5 17 8 20 8Z" fill="#0a1f3a"/>
+                        <path d="M20 12C21.5 12 22.5 13 23 14.5C23.5 16 23.5 17.5 23 19C22.5 20.5 21.5 21.5 20 21.5C18.5 21.5 17.5 20.5 17 19C16.5 17.5 16.5 16 17 14.5C17.5 13 18.5 12 20 12Z" fill="white"/>
+                        <path d="M15 7C14 8 13.5 9.5 13.5 11C13.5 12.5 14 14 15 15C16 16 17.5 16.5 19 16.5C20.5 16.5 22 16 23 15C24 14 24.5 12.5 24.5 11C24.5 9.5 24 8 23 7C22 6 20.5 5.5 19 5.5C17.5 5.5 16 6 15 7Z" fill="#08c792"/>
+                        <path d="M5 20C5 19 6 18 7 18C8 18 9 19 9 20C9 21 8 22 7 22C6 22 5 21 5 20Z" fill="#8b5cf6"/>
+                        <path d="M31 20C31 19 32 18 33 18C34 18 35 19 35 20C35 21 34 22 33 22C32 22 31 21 31 20Z" fill="#8b5cf6"/>
+                        <path d="M20 5C20 4 21 3 22 3C23 3 24 4 24 5C24 6 23 7 22 7C21 7 20 6 20 5Z" fill="#8b5cf6"/>
+                        <path d="M20 33C20 32 21 31 22 31C23 31 24 32 24 33C24 34 23 35 22 35C21 35 20 34 20 33Z" fill="#8b5cf6"/>
+                        <path d="M10 10C10 9 11 8 12 8C13 8 14 9 14 10C14 11 13 12 12 12C11 12 10 11 10 10Z" fill="#8b5cf6"/>
+                        <path d="M26 26C26 25 27 24 28 24C29 24 30 25 30 26C30 27 29 28 28 28C27 28 26 27 26 26Z" fill="#8b5cf6"/>
+                        <path d="M10 30C10 29 11 28 12 28C13 28 14 29 14 30C14 31 13 32 12 32C11 32 10 31 10 30Z" fill="#8b5cf6"/>
+                        <path d="M26 14C26 13 27 12 28 12C29 12 30 13 30 14C30 15 29 16 28 16C27 16 26 15 26 14Z" fill="#8b5cf6"/>
+                        <path d="M18 25L16 28L20 30L24 28L22 25L20 26L18 25Z" fill="#fbbf24"/>
+                    </svg>
+                </div>
+                <span>Nautilus AI</span>
+            </div>
+            <a href="#contact" class="cta-button">Contactar Ahora</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-launch">
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i> LANZAMIENTO OFICIAL
+            </div>
+            <h1>Revolucionamos la Logística Marítima con Inteligencia Artificial</h1>
+            <p>Optimización inteligente de operaciones marítimas mediante IA avanzada, datos satelitales en tiempo real, IoT y conectividad 5G para máxima eficiencia</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn-launch">
+                    <i class="fas fa-play-circle"></i> Ver Demo Interactiva
+                </a>
+                <a href="#contact" class="btn-launch btn-outline-white">
+                    <i class="fas fa-calendar-check"></i> Solicitar Demo Personalizada
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="section-bg">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ventajas Competitivas de Nautilus AI</h2>
+                <p>Ofrecemos soluciones integrales que ninguna otra plataforma proporciona en el mercado actual</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>IA Predictiva Avanzada</h3>
+                    <p>Algoritmos de machine learning que mejoran continuamente con cada viaje, ofreciendo optimizaciones cada vez más precisas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Blockchain Integrado</h3>
+                    <p>Sistema verificable e inmutable para la gestión y comercialización de créditos de carbono con transparencia total.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Datos Satelitales en Tiempo Real</h3>
+                    <p>Integración con las principales fuentes de datos satelitales para monitoreo preciso de condiciones oceánicas y meteorológicas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Conectividad 5G</h3>
+                    <p>Comunicación ultrarrápida y de baja latencia para transmisión de datos en tiempo real incluso en alta mar.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3>Dashboard Hyper-Personalizable</h3>
+                    <p>Cada cliente configura sus KPIs específicos con vistas por tipo de barco, ruta u objetivo operativo.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-api"></i>
+                    </div>
+                    <h3>API Abierta y Ecosystem</h3>
+                    <p>Desarrollamos API pública para integraciones de terceros y un marketplace de aplicaciones especializadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registro -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo Registrarse y Participar?</h2>
+                <p>Sigue estos simples pasos para unirte a la revolución de la logística marítima inteligente</p>
+            </div>
+            
+            <div class="registration-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Registro Online</h3>
+                    <p>Completa nuestro formulario de registro para acceder a la plataforma beta y documentación exclusiva.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Demo Personalizada</h3>
+                    <p>Programa una demostración personalizada con nuestro equipo de expertos para ver el potencial real.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Implementación</h3>
+                    <p>Nuestro equipo te acompañará en el proceso de implementación y capacitación de tu personal.</p>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#" class="btn-launch" id="register-btn">
+                    <i class="fas fa-user-plus"></i> Registrarse Ahora
+                </a>
+                <a href="#contact" class="btn-launch btn-outline-white">
+                    <i class="fas fa-handshake"></i> Solicitar Reunión
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacta con Nuestro Equipo</h2>
+                <p>¿Listo para revolucionar tu operativa marítima? Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas</p>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Empresa</label>
+                        <input type="text" id="company" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">Interés Principal</label>
+                        <select id="interest" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="optimization">Optimización de Rutas</option>
+                            <option value="carbon">Monetización de Carbono</option>
+                            <option value="maintenance">Mantenimiento Predictivo</option>
+                            <option value="investment">Oportunidad de Inversión</option>
+                            <option value="partnership">Alianza Estratégica</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-launch" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Nautilus AI Enterprise</h3>
+                    <p>Plataforma líder de optimización marítima con inteligencia artificial, datos satelitales, IoT y conectividad 5G para operaciones de clase mundial.</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/company/nautilus-ai" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me/nautilusai" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://github.com/nautilus-ai" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.youtube.com/channel/UCnautilusai" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/5350600275" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:nautilusiaone@gmail.com"><i class="fas fa-envelope"></i> nautilusiaone@gmail.com</a></li>
+                        <li><a href="tel:+5350600275"><i class="fas fa-phone"></i> +53 5 060 0275</a></li>
+                        <li><a href="https://wa.me/5350600275" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="https://t.me/nautilusai" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-rocket"></i> Lanzamiento</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> Documentación API</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> White Paper</a></li>
+                        <li><a href="#"><i class="fas fa-briefcase"></i> Oportunidades de Inversión</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Nautilus AI Enterprise. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Registro para Inversores y Clientes</h2>
+            <form>
+                <div class="form-group">
+                    <label for="modal-name">Nombre Completo</label>
+                    <input type="text" id="modal-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-email">Correo Electrónico</label>
+                    <input type="email" id="modal-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-type">Tipo de Registro</label>
+                    <select id="modal-type" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="investor">Inversor</option>
+                        <option value="client">Cliente Potencial</option>
+                        <option value="partner">Aliado Estratégico</option>
+                        <option value="developer">Desarrollador/API</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-launch" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Enviar Registro
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('registrationModal');
+        const registerBtn = document.getElementById('register-btn');
+        const closeModal = document.querySelector('.close-modal');
+        
+        registerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo en menos de 24 horas.');
+            this.reset();
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
