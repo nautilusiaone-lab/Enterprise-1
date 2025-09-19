@@ -45,17 +45,30 @@
             --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         }
         
+        .dark-mode {
+            --primary-dark: #e0eaff;
+            --primary: #3b82f6;
+            --primary-light: #0a1f3a;
+            --text-dark: #f9fafb;
+            --text-light: #111827;
+            --gray: #9ca3af;
+            --light-bg: #111827;
+            --gradient-enterprise: linear-gradient(135deg, #1e3a8a 0%, #0a1f3a 50%, #1e4dd8 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
         
         html, body {
             width: 100%;
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
         }
         
         body {
@@ -69,12 +82,12 @@
         
         .container {
             width: 100%;
-            max-width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
 
-        /* Loader */
+        /* Loader mejorado */
         .loader-container {
             position: fixed;
             top: 0;
@@ -140,6 +153,9 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .header-badge {
@@ -154,7 +170,21 @@
             font-size: 0.8rem;
         }
         
-        /* Navigation */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Navigation mejorada */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -164,6 +194,11 @@
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark-mode header {
+            background: rgba(17, 24, 39, 0.98);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .header-content {
@@ -182,6 +217,10 @@
             color: var(--enterprise);
         }
         
+        .dark-mode .logo {
+            color: var(--primary);
+        }
+        
         .logo-img {
             height: 40px;
             width: auto;
@@ -193,6 +232,7 @@
             height: 100%;
             width: auto;
             object-fit: contain;
+            max-width: 180px;
         }
         
         .mobile-menu-btn {
@@ -202,6 +242,10 @@
             font-size: 1.5rem;
             color: var(--primary-dark);
             cursor: pointer;
+        }
+        
+        .dark-mode .mobile-menu-btn {
+            color: var(--text-dark);
         }
         
         nav ul {
@@ -221,9 +265,17 @@
             font-size: 1rem;
         }
         
+        .dark-mode nav a {
+            color: var(--text-dark);
+        }
+        
         nav a:hover {
             color: var(--primary);
             background: rgba(30, 77, 216, 0.05);
+        }
+        
+        .dark-mode nav a:hover {
+            background: rgba(30, 77, 216, 0.2);
         }
         
         .cta-button {
@@ -241,7 +293,7 @@
             box-shadow: 0 15px 40px rgba(30, 58, 138, 0.5);
         }
         
-        /* Hero Section */
+        /* Hero Section mejorada */
         .hero-enterprise {
             padding: 120px 0 80px;
             background: linear-gradient(112deg, rgba(10, 31, 58, 0.92) 0%, rgba(30, 58, 138, 0.95) 100%), url('https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
@@ -362,6 +414,10 @@
             background-size: 300px;
         }
         
+        .dark-mode .section-bg {
+            background: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%231f2937" width="100" height="100"/><path d="M0 0L100 100" stroke="%23374151" stroke-width="1"/></svg>');
+        }
+        
         .section-title {
             text-align: center;
             margin-bottom: 50px;
@@ -383,7 +439,7 @@
             padding: 0 15px;
         }
         
-        /* Tecnología Grid */
+        /* Tecnología Grid mejorada */
         .tech-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -401,6 +457,10 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+        }
+        
+        .dark-mode .tech-card {
+            background: #1f2937;
         }
         
         .tech-card::before {
@@ -499,7 +559,7 @@
             color: #7e22ce;
         }
         
-        /* Dashboard */
+        /* Dashboard mejorado */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -516,6 +576,10 @@
             position: relative;
             overflow: hidden;
             width: 100%;
+        }
+        
+        .dark-mode .dashboard-card {
+            background: #1f2937;
         }
         
         .dashboard-card::before {
@@ -569,6 +633,10 @@
             border-radius: 12px;
         }
         
+        .dark-mode .stat-item {
+            background: #374151;
+        }
+        
         .stat-value {
             font-size: 1.8rem;
             font-weight: 900;
@@ -582,7 +650,7 @@
             font-size: 0.9rem;
         }
         
-        /* Gráfico en tiempo real */
+        /* Gráfico en tiempo real mejorado */
         .realtime-chart {
             background: white;
             padding: 30px 20px;
@@ -591,6 +659,10 @@
             margin-top: 50px;
             text-align: center;
             width: 100%;
+        }
+        
+        .dark-mode .realtime-chart {
+            background: #1f2937;
         }
         
         .realtime-chart h3 {
@@ -606,7 +678,7 @@
             width: 100%;
         }
         
-        /* Demo Interactiva */
+        /* Demo Interactiva mejorada */
         .demo-container {
             background: white;
             border-radius: 20px;
@@ -616,6 +688,10 @@
             position: relative;
             overflow: hidden;
             width: 100%;
+        }
+        
+        .dark-mode .demo-container {
+            background: #1f2937;
         }
         
         .demo-controls {
@@ -646,6 +722,13 @@
             font-size: 1rem;
             transition: all 0.3s;
             background: white;
+        }
+        
+        .dark-mode .control-group input,
+        .dark-mode .control-group select {
+            background: #374151;
+            border-color: #4b5563;
+            color: white;
         }
         
         .control-group input:focus,
@@ -690,6 +773,12 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 0.9rem;
+        }
+        
+        .dark-mode .map-layer-btn {
+            background: #374151;
+            border-color: #4b5563;
+            color: white;
         }
         
         .map-layer-btn.active {
@@ -751,6 +840,10 @@
             width: 100%;
         }
         
+        .dark-mode .result-card {
+            background: #1f2937;
+        }
+        
         .result-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-3xl);
@@ -772,7 +865,84 @@
             font-size: 1rem;
         }
         
-        /* Footer */
+        /* Nueva sección de testimonios */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+        
+        .dark-mode .testimonials {
+            background: #111827;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+        }
+        
+        .dark-mode .testimonial-card {
+            background: #1f2937;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 5rem;
+            color: var(--primary-light);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            background: var(--gradient-enterprise);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer mejorado */
         footer.enterprise-footer {
             background: var(--gradient-enterprise);
             color: white;
@@ -865,7 +1035,87 @@
             font-size: 1rem;
         }
         
-        /* Responsive */
+        /* Upload logo section */
+        .logo-upload-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-2xl);
+            text-align: center;
+        }
+        
+        .dark-mode .logo-upload-section {
+            background: #1f2937;
+        }
+        
+        .logo-upload-section h3 {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+        
+        .logo-preview {
+            width: 200px;
+            height: 80px;
+            margin: 20px auto;
+            border: 2px dashed var(--gray);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logo-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .upload-btn {
+            background: var(--gradient-enterprise);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--gradient-enterprise);
+            color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-3xl);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Responsive mejorado */
         @media (min-width: 640px) {
             .container {
                 padding: 0 20px;
@@ -893,6 +1143,10 @@
             }
             
             .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -926,6 +1180,10 @@
                 grid-template-columns: repeat(4, 1fr);
             }
             
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .map-controls {
                 justify-content: flex-start;
             }
@@ -938,6 +1196,10 @@
             
             .tech-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
             
             .footer-content {
@@ -974,6 +1236,10 @@
                 box-shadow: var(--shadow-2xl);
             }
             
+            .dark-mode nav ul {
+                background: #1f2937;
+            }
+            
             nav ul.show {
                 display: flex;
             }
@@ -984,6 +1250,12 @@
             
             .map-container {
                 height: 300px;
+            }
+            
+            .enterprise-header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
             }
         }
     </style>
@@ -1004,22 +1276,30 @@
 
     <!-- Enterprise Header -->
     <div class="enterprise-header">
-        <div class="container">
+        <div>
             🚀 <strong>NAUTILUS AI ENTERPRISE PLATFORM</strong> - Integrando IA, Satélite, IoT y 5G <span class="header-badge">TECNOLOGÍA AVANZADA</span>
         </div>
+        <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
     </div>
 
     <!-- Navigation -->
     <header>
         <div class="container header-content">
-            <div class="logo-img">
-    <img src="Imágenes/file_000000008e9c6230ad05e9f2e06b4f70.jpg" alt="Nautilus AI Logo">
-</div>
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="" alt="Nautilus AI Logo" id="custom-logo">
+                </div>
+                <span>Nautilus AI</span>
+            </div>
+            <nav>
                 <ul id="nav-menu">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#tecnologias">Tecnologías</a></li>
                     <li><a href="#soluciones">Soluciones</a></li>
                     <li><a href="#demo">Demo</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
                     <li><a href="#contacto" class="cta-button">Solicitar Demo</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="menu-btn">
@@ -1038,7 +1318,7 @@
             </div>
             <h1>Revolucionamos la Logística Marítima con Tecnología de Vanguardia</h1>
             <p>Optimización inteligente de operaciones marítimas mediante IA avanzada, datos satelitales en tiempo real, IoT y conectividad 5G para máxima eficiencia</p>
-            <p class="hero-subtitle">Ahorros verificados de hasta 35% en costos operativos y reducción de 40% en emisiones de carbono</p>
+            <p class="hero-subtitle">Ahorros verificados de hasta 35% en costos operativos and reducción de 40% en emisiones de carbono</p>
             <div class="hero-buttons">
                 <a href="#demo" class="btn-enterprise">
                     <i class="fas fa-play-circle"></i> Demo Interactiva
@@ -1046,6 +1326,26 @@
                 <a href="#contacto" class="btn-enterprise btn-outline-white">
                     <i class="fas fa-calendar-check"></i> Solicitar Demo
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección para cargar logo -->
+    <section class="section-bg">
+        <div class="container">
+            <div class="section-title">
+                <h2>Personaliza tu Experiencia</h2>
+                <p>Agrega tu logo para una experiencia personalizada con nuestra plataforma</p>
+            </div>
+            <div class="logo-upload-section">
+                <h3>Agregar Logo Personalizado</h3>
+                <div class="logo-preview" id="logo-preview">
+                    <span>Vista previa del logo</span>
+                </div>
+                <input type="file" id="logo-upload" accept="image/*" style="display: none;">
+                <button class="upload-btn" onclick="document.getElementById('logo-upload').click()">
+                    <i class="fas fa-upload"></i> Seleccionar Logo
+                </button>
             </div>
         </div>
     </section>
@@ -1309,49 +1609,104 @@
         </div>
     </section>
 
+    <!-- Nueva sección de testimonios -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimonios de Clientes</h2>
+                <p>Descubre lo que nuestros clientes dicen sobre nuestra plataforma</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "La implementación de Nautilus AI ha transformado por completo nuestras operaciones logísticas. Hemos reducido nuestros costos de combustible en un 28% y mejorado la precisión de nuestras entregas."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4>Juan Carlos Rodríguez</h4>
+                            <p>Director de Operaciones, Naviera Global</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "El sistema predictivo de mantenimiento nos ha ahorrado miles en reparaciones no planizadas. La capacidad de anticipar fallos con meses de antelación es invaluable para nuestra flota."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MG</div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Gerente de Flota, Transportes Marítimos SA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "La integración de datos satelitales en tiempo real con IA ha elevado nuestros estándares de seguridad y eficiencia. Una plataforma realmente revolucionaria para el sector marítimo."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Antonio López</h4>
+                            <p>CEO, Logística Oceánica Internacional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-<footer class="enterprise-footer" id="contacto">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Nautilus AI Enterprise</h3>
-                <p>Plataforma líder de optimización marítima con inteligencia artificial, datos satelitales, IoT y conectividad 5G para operaciones de clase mundial.</p>
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/company/nautilus-ai" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://t.me/nautilusai" target="_blank"><i class="fab fa-telegram"></i></a>
-                    <a href="https://github.com/nautilus-ai" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.youtube.com/channel/UCnautilusai" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://wa.me/5350600275" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <footer class="enterprise-footer" id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Nautilus AI Enterprise</h3>
+                    <p>Plataforma líder de optimización marítima con inteligencia artificial, datos satelitales, IoT y conectividad 5G para operaciones de clase mundial.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:enterprise@nautilus-ai.com"><i class="fas fa-envelope"></i> enterprise@nautilus-ai.com</a></li>
+                        <li><a href="tel:+5350600275"><i class="fas fa-phone"></i> +53 5 060 0275</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Enterprise</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> República Dominicana, HQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Soluciones</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Optimización de Flotas</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Mantenimiento Predictivo</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Monetización de Carbono</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Datos Satelitales</a></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="footer-column">
-                <h3>Contacto</h3>
-                <ul>
-                    <li><a href="mailto:nautilusiaone@gmail.com"><i class="fas fa-envelope"></i> nautilusiaone@gmail.com</a></li>
-                    <li><a href="tel:+5350600275"><i class="fas fa-phone"></i> +53 5 060 0275</a></li>
-                    <li><a href="https://wa.me/5350600275" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                    <li><a href="https://t.me/nautilusai" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
-                    <li><a href="https://www.linkedin.com/company/nautilus-ai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Soluciones</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-route"></i> Optimización de Flotas</a></li>
-                    <li><a href="#"><i class="fas fa-tools"></i> Mantenimiento Predictivo</a></li>
-                    <li><a href="#"><i class="fas fa-leaf"></i> Monetización de Carbono</a></li>
-                    <li><a href="#"><i class="fas fa-satellite"></i> Datos Satelitales</a></li>
-                </ul>
+            <div class="copyright">
+                <p>&copy; 2025 Nautilus AI Enterprise. Todos los derechos reservados.</p>
             </div>
         </div>
-        
-        <div class="copyright">
-            <p>&copy; 2025 Nautilus AI Enterprise. Todos los derechos reservados.</p>
-        </div>
+    </footer>
+
+    <!-- Notificación -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Operación completada con éxito</span>
     </div>
-</footer>
 
     <script>
         // Inicialización cuando el DOM esté completamente cargado
@@ -1367,6 +1722,8 @@
             setupDemo();
             initializeChart();
             initParticles();
+            setupThemeToggle();
+            setupLogoUpload();
         });
         
         // Variables globales para el mapa y capas
@@ -1413,6 +1770,79 @@
                     }
                 });
             });
+        }
+        
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            // Comprobar preferencia del usuario
+            if (localStorage.getItem('theme') === 'dark' || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+        
+        function setupLogoUpload() {
+            const logoUpload = document.getElementById('logo-upload');
+            const logoPreview = document.getElementById('logo-preview');
+            const customLogo = document.getElementById('custom-logo');
+            
+            logoUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const logoUrl = e.target.result;
+                        logoPreview.innerHTML = `<img src="${logoUrl}" alt="Logo personalizado">`;
+                        customLogo.src = logoUrl;
+                        
+                        // Guardar en localStorage para persistencia
+                        localStorage.setItem('customLogo', logoUrl);
+                        
+                        // Mostrar notificación
+                        showNotification('Logo actualizado correctamente');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Cargar logo guardado si existe
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                logoPreview.innerHTML = `<img src="${savedLogo}" alt="Logo personalizado">`;
+                customLogo.src = savedLogo;
+            }
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
         
         function setupDemo() {
@@ -1832,6 +2262,9 @@
             
             // Animación de resultados
             highlightResults();
+            
+            // Mostrar notificación
+            showNotification('Optimización calculada con éxito');
         }
         
         function updateResults() {
