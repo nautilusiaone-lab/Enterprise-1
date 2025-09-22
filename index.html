@@ -215,6 +215,7 @@
             font-weight: 800;
             font-size: 1.5rem;
             color: var(--enterprise);
+            min-height: 40px;
         }
         
         .dark-mode .logo {
@@ -223,16 +224,16 @@
         
         .logo-img {
             height: 40px;
-            width: auto;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
         
         .logo-img img {
             height: 100%;
-            width: auto;
-            object-fit: contain;
             max-width: 180px;
+            object-fit: contain;
+            display: block;
         }
         
         .mobile-menu-btn {
@@ -903,6 +904,7 @@
             color: var(--primary-light);
             opacity: 0.2;
             font-family: Georgia, serif;
+            line-height: 1;
         }
         
         .testimonial-content {
@@ -1035,60 +1037,132 @@
             font-size: 1rem;
         }
         
-        /* Upload logo section */
-        .logo-upload-section {
+        /* Personalización lateral compacta */
+        .personalization-panel {
+            position: fixed;
+            top: 50%;
+            right: -250px;
+            transform: translateY(-50%);
+            width: 250px;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            box-shadow: var(--shadow-2xl);
-            text-align: center;
+            border-radius: 15px 0 0 15px;
+            box-shadow: -5px 5px 25px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            z-index: 999;
+            transition: right 0.4s ease;
         }
         
-        .dark-mode .logo-upload-section {
+        .dark-mode .personalization-panel {
             background: #1f2937;
         }
         
-        .logo-upload-section h3 {
-            margin-bottom: 20px;
-            color: var(--primary-dark);
+        .personalization-panel.open {
+            right: 0;
         }
         
-        .logo-preview {
-            width: 200px;
+        .panel-toggler {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-enterprise);
+            color: white;
+            border-radius: 10px 0 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .dark-mode .panel-header {
+            border-bottom: 1px solid #374151;
+        }
+        
+        .panel-header h3 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin: 0;
+        }
+        
+        .dark-mode .panel-header h3 {
+            color: var(--text-dark);
+        }
+        
+        .close-panel {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .logo-preview-container {
+            width: 100%;
             height: 80px;
-            margin: 20px auto;
+            margin: 15px 0;
             border: 2px dashed var(--gray);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background: var(--light-bg);
         }
         
-        .logo-preview img {
-            max-width: 100%;
-            max-height: 100%;
+        .dark-mode .logo-preview-container {
+            background: #374151;
+            border-color: #4b5563;
+        }
+        
+        .logo-preview-container img {
+            max-width: 95%;
+            max-height: 95%;
             object-fit: contain;
         }
         
         .upload-btn {
+            width: 100%;
             background: var(--gradient-enterprise);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
         }
         
         .upload-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+        }
+        
+        .panel-footer {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+        }
+        
+        /* Eliminar la sección anterior de carga de logo */
+        .logo-upload-section {
+            display: none;
         }
         
         /* Notifications */
@@ -1257,6 +1331,11 @@
                 gap: 10px;
                 padding: 10px 0;
             }
+            
+            .personalization-panel {
+                width: 85%;
+                right: -85%;
+            }
         }
     </style>
 </head>
@@ -1309,6 +1388,30 @@
         </div>
     </header>
 
+    <!-- Panel de personalización lateral -->
+    <div class="personalization-panel" id="personalization-panel">
+        <div class="panel-toggler" id="panel-toggler">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+        <div class="panel-header">
+            <h3>Personalizar Experiencia</h3>
+            <button class="close-panel" id="close-panel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p>Agrega tu logo para una experiencia personalizada</p>
+        <div class="logo-preview-container" id="logo-preview">
+            <span>Vista previa</span>
+        </div>
+        <input type="file" id="logo-upload" accept="image/*" style="display: none;">
+        <button class="upload-btn" onclick="document.getElementById('logo-upload').click()">
+            <i class="fas fa-upload"></i> Seleccionar Logo
+        </button>
+        <div class="panel-footer">
+            Formatos soportados: JPG, PNG, SVG
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-enterprise" id="inicio">
         <div id="particles-js"></div>
@@ -1326,26 +1429,6 @@
                 <a href="#contacto" class="btn-enterprise btn-outline-white">
                     <i class="fas fa-calendar-check"></i> Solicitar Demo
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección para cargar logo -->
-    <section class="section-bg">
-        <div class="container">
-            <div class="section-title">
-                <h2>Personaliza tu Experiencia</h2>
-                <p>Agrega tu logo para una experiencia personalizada con nuestra plataforma</p>
-            </div>
-            <div class="logo-upload-section">
-                <h3>Agregar Logo Personalizado</h3>
-                <div class="logo-preview" id="logo-preview">
-                    <span>Vista previa del logo</span>
-                </div>
-                <input type="file" id="logo-upload" accept="image/*" style="display: none;">
-                <button class="upload-btn" onclick="document.getElementById('logo-upload').click()">
-                    <i class="fas fa-upload"></i> Seleccionar Logo
-                </button>
             </div>
         </div>
     </section>
@@ -1724,6 +1807,7 @@
             initParticles();
             setupThemeToggle();
             setupLogoUpload();
+            setupPersonalizationPanel();
         });
         
         // Variables globales para el mapa y capas
@@ -1744,7 +1828,7 @@
             menuBtn.addEventListener('click', () => {
                 navMenu.classList.toggle('show');
                 menuBtn.innerHTML = navMenu.classList.contains('show') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars'></i>';
             });
             
             // Smooth scrolling para enlaces de navegación
@@ -1799,6 +1883,30 @@
             });
         }
         
+        // Configuración del panel de personalización lateral
+        function setupPersonalizationPanel() {
+            const panel = document.getElementById('personalization-panel');
+            const toggler = document.getElementById('panel-toggler');
+            const closeBtn = document.getElementById('close-panel');
+            
+            toggler.addEventListener('click', () => {
+                panel.classList.add('open');
+            });
+            
+            closeBtn.addEventListener('click', () => {
+                panel.classList.remove('open');
+            });
+            
+            // Cerrar panel al hacer clic fuera de él
+            document.addEventListener('click', (e) => {
+                if (panel.classList.contains('open') && 
+                    !panel.contains(e.target) && 
+                    e.target !== toggler) {
+                    panel.classList.remove('open');
+                }
+            });
+        }
+        
         function setupLogoUpload() {
             const logoUpload = document.getElementById('logo-upload');
             const logoPreview = document.getElementById('logo-preview');
@@ -1813,6 +1921,11 @@
                         const logoUrl = e.target.result;
                         logoPreview.innerHTML = `<img src="${logoUrl}" alt="Logo personalizado">`;
                         customLogo.src = logoUrl;
+                        
+                        // Ajustar el logo en el header para que se vea completo
+                        customLogo.onload = function() {
+                            adjustLogoSize(customLogo);
+                        };
                         
                         // Guardar en localStorage para persistencia
                         localStorage.setItem('customLogo', logoUrl);
@@ -1830,6 +1943,34 @@
             if (savedLogo) {
                 logoPreview.innerHTML = `<img src="${savedLogo}" alt="Logo personalizado">`;
                 customLogo.src = savedLogo;
+                
+                // Ajustar el logo cuando se cargue
+                customLogo.onload = function() {
+                    adjustLogoSize(customLogo);
+                };
+            }
+        }
+        
+        // Función para ajustar el tamaño del logo en el header
+        function adjustLogoSize(imgElement) {
+            const container = imgElement.parentElement;
+            const naturalWidth = imgElement.naturalWidth;
+            const naturalHeight = imgElement.naturalHeight;
+            const aspectRatio = naturalWidth / naturalHeight;
+            
+            // Ajustar según la relación de aspecto para que no se deforme
+            if (aspectRatio > 3) {
+                // Logo muy ancho - limitar ancho
+                imgElement.style.width = '180px';
+                imgElement.style.height = 'auto';
+            } else if (aspectRatio < 1) {
+                // Logo muy alto - limitar altura
+                imgElement.style.width = 'auto';
+                imgElement.style.height = '40px';
+            } else {
+                // Logo proporcionado - usar altura completa
+                imgElement.style.width = 'auto';
+                imgElement.style.height = '40px';
             }
         }
         
@@ -2161,15 +2302,6 @@
                     standard: [
                         [31.23, 121.47], [35, 160], [40, -160], [37, -125],
                         [32.72, -117.16]
-                    ]
-                },
-                'transpacific': {
-                    optimized: [
-                        [35.68, 139.76], [37.77, -122.41], [34.05, -118.24],
-                        [32.72, -117.16], [47.61, -122.34]
-                    ],
-                    standard: [
-                        [35.68, 139.76], [40, -170], [45, -150], [47.61, -122.34]
                     ]
                 }
             };
