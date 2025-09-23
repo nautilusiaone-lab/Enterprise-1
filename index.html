@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <style>
         :root {
             --primary-dark: #0a1f3a;
@@ -87,7 +81,7 @@
             padding: 0 15px;
         }
 
-        /* Loader mejorado */
+        /* Loader moderno y rápido */
         .loader-container {
             position: fixed;
             top: 0;
@@ -100,7 +94,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
         }
 
         .loader-container.hidden {
@@ -108,37 +102,46 @@
             visibility: hidden;
         }
 
-        .neural-loader {
+        .modern-loader {
             width: 120px;
             height: 120px;
             position: relative;
         }
 
-        .neural-node {
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: absolute;
-            animation: pulse 1.5s infinite;
+        .loader-logo {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="white" d="M50 15a35 35 0 1 0 0 70 35 35 0 0 0 0-70zm0 5a30 30 0 1 1 0 60 30 30 0 0 1 0-60zm0 10a20 20 0 1 0 0 40 20 20 0 0 0 0-40zm0 5a15 15 0 1 1 0 30 15 15 0 0 1 0-30z"/><path fill="%2308c792" d="M50 40a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>') no-repeat center center;
+            background-size: contain;
+            animation: pulse-logo 1.5s infinite alternate;
         }
 
-        .neural-node:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
-        .neural-node:nth-child(2) { top: 30px; right: 15px; animation-delay: 0.2s; }
-        .neural-node:nth-child(3) { top: 30px; left: 15px; animation-delay: 0.4s; }
-        .neural-node:nth-child(4) { top: 60px; right: 30px; animation-delay: 0.6s; }
-        .neural-node:nth-child(5) { top: 60px; left: 30px; animation-delay: 0.8s; }
-        .neural-node:nth-child(6) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
+        @keyframes pulse-logo {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
 
         .loader-text {
-            margin-top: 25px;
+            margin-top: 20px;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-align: center;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -1160,11 +1163,6 @@
             text-align: center;
         }
         
-        /* Eliminar la sección anterior de carga de logo */
-        .logo-upload-section {
-            display: none;
-        }
-        
         /* Notifications */
         .notification {
             position: fixed;
@@ -1340,17 +1338,15 @@
     </style>
 </head>
 <body>
-    <!-- Loader -->
+    <!-- Loader moderno y rápido -->
     <div class="loader-container" id="loader">
-        <div class="neural-loader">
-            <div class="neural-node"></div>
-            <div class="neural-node"></div>
-            <div class="neural-node"></div>
-            <div class="neural-node"></div>
-            <div class="neural-node"></div>
-            <div class="neural-node"></div>
+        <div class="modern-loader">
+            <div class="loader-logo"></div>
         </div>
-        <div class="loader-text">Inicializando Plataforma Enterprise...</div>
+        <div class="loader-progress">
+            <div class="loader-progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="loader-text" id="loader-text">Inicializando Plataforma Enterprise...</div>
     </div>
 
     <!-- Enterprise Header -->
@@ -1791,6 +1787,14 @@
         <span id="notification-text">Operación completada con éxito</span>
     </div>
 
+    <!-- Scripts cargados de forma asíncrona para mejor rendimiento -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" async></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" async></script>
+
     <script>
         // Clase principal para gestionar la plataforma Nautilus AI
         class NautilusPlatform {
@@ -1798,36 +1802,88 @@
                 this.demoMap = null;
                 this.mapLayers = {};
                 this.currentLayer = 'osm';
-                this.markers = L.markerClusterGroup();
+                this.markers = null;
                 this.performanceChart = null;
                 this.isDarkMode = false;
-                this.animationFrameId = null;
                 this.simulationInterval = null;
+                this.loadedResources = 0;
+                this.totalResources = 5; // Número de recursos externos
             }
 
             // Inicializar la plataforma
-            init() {
-                this.setupLoader();
+            async init() {
+                // Iniciar la carga progresiva
+                this.startProgressiveLoading();
+                
+                // Cargar recursos críticos primero
+                await this.loadCriticalResources();
+                
+                // Inicializar componentes esenciales
                 this.setupNavigation();
                 this.setupThemeToggle();
                 this.setupPersonalizationPanel();
                 this.setupLogoUpload();
-                this.setupDemo();
-                this.initializeChart();
-                this.initParticles();
-                this.startRealTimeSimulation();
                 
-                // Configurar animaciones automáticas
-                this.setupAutoAnimations();
+                // Inicializar componentes no críticos después de la carga
+                setTimeout(() => {
+                    this.setupDemo();
+                    this.initializeChart();
+                    this.initParticles();
+                    this.startRealTimeSimulation();
+                    this.setupAutoAnimations();
+                }, 100);
             }
 
-            // Configurar el loader
-            setupLoader() {
-                // Simular carga de recursos
-                setTimeout(() => {
-                    document.getElementById('loader').classList.add('hidden');
-                    this.showNotification('Plataforma Nautilus AI Enterprise cargada correctamente');
-                }, 3000);
+            // Iniciar carga progresiva con barra de progreso
+            startProgressiveLoading() {
+                const progressBar = document.getElementById('progress-bar');
+                const loaderText = document.getElementById('loader-text');
+                
+                // Simular progreso de carga
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // Ocultar loader después de un breve momento
+                        setTimeout(() => {
+                            document.getElementById('loader').classList.add('hidden');
+                            this.showNotification('Plataforma Nautilus AI Enterprise cargada correctamente');
+                        }, 300);
+                    }
+                    
+                    progressBar.style.width = progress + '%';
+                    
+                    // Actualizar texto según el progreso
+                    if (progress < 30) {
+                        loaderText.textContent = 'Cargando módulos principales...';
+                    } else if (progress < 60) {
+                        loaderText.textContent = 'Inicializando componentes...';
+                    } else if (progress < 90) {
+                        loaderText.textContent = 'Optimizando rendimiento...';
+                    } else {
+                        loaderText.textContent = '¡Listo! Iniciando plataforma...';
+                    }
+                }, 100);
+            }
+
+            // Cargar recursos críticos
+            async loadCriticalResources() {
+                // Esperar a que los recursos críticos estén listos
+                return new Promise((resolve) => {
+                    // Verificar si los scripts críticos están cargados
+                    const checkResources = () => {
+                        if (typeof L !== 'undefined') {
+                            resolve();
+                        } else {
+                            setTimeout(checkResources, 100);
+                        }
+                    };
+                    
+                    checkResources();
+                });
             }
 
             // Configurar navegación
@@ -2073,8 +2129,17 @@
                     this.toggleTechnology('5g');
                 });
                 
-                // Inicializar mapa
-                this.initializeDemoMap();
+                // Inicializar mapa (solo si Leaflet está disponible)
+                if (typeof L !== 'undefined') {
+                    this.initializeDemoMap();
+                } else {
+                    // Reintentar después de un tiempo si Leaflet no está cargado
+                    setTimeout(() => {
+                        if (typeof L !== 'undefined') {
+                            this.initializeDemoMap();
+                        }
+                    }, 1000);
+                }
                 
                 // Calcular optimización inicial
                 this.calculateOptimization();
@@ -2082,51 +2147,55 @@
 
             // Inicializar el mapa de demostración
             initializeDemoMap() {
-                // Inicializar el mapa de demostración
-                this.demoMap = L.map('demo-map', {
-                    zoomControl: false,
-                    minZoom: 2,
-                    maxBounds: [[-90, -180], [90, 180]],
-                    maxBoundsViscosity: 1.0
-                }).setView([25, 0], 2);
-                
-                // Añadir control de zoom
-                L.control.zoom({
-                    position: 'topright'
-                }).addTo(this.demoMap);
-                
-                // Configuración de capas base
-                this.mapLayers.osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors',
-                    maxZoom: 19
-                });
-                
-                this.mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: '© Esri',
-                    maxZoom: 19
-                });
-                
-                // Capa de tráfico marítimo (simulada con marcadores)
-                this.mapLayers.traffic = L.layerGroup();
-                
-                // Capa de condiciones meteorológicas (simulada)
-                this.mapLayers.weather = L.layerGroup();
-                
-                // Capa de corrientes marinas (simulada)
-                this.mapLayers.currents = L.layerGroup();
-                
-                // Añadir capa base por defecto
-                this.mapLayers.osm.addTo(this.demoMap);
-                this.currentLayer = 'osm';
-                
-                // Añadir marcadores de ejemplo (puertos importantes)
-                this.addPortMarkers();
-                
-                // Añadir rutas de ejemplo
-                this.addDemoRoutes();
-                
-                // Añadir leyenda
-                this.addMapLegend();
+                try {
+                    // Inicializar el mapa de demostración
+                    this.demoMap = L.map('demo-map', {
+                        zoomControl: false,
+                        minZoom: 2,
+                        maxBounds: [[-90, -180], [90, 180]],
+                        maxBoundsViscosity: 1.0
+                    }).setView([25, 0], 2);
+                    
+                    // Añadir control de zoom
+                    L.control.zoom({
+                        position: 'topright'
+                    }).addTo(this.demoMap);
+                    
+                    // Configuración de capas base
+                    this.mapLayers.osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 19
+                    });
+                    
+                    this.mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                        attribution: '© Esri',
+                        maxZoom: 19
+                    });
+                    
+                    // Capa de tráfico marítimo (simulada con marcadores)
+                    this.mapLayers.traffic = L.layerGroup();
+                    
+                    // Capa de condiciones meteorológicas (simulada)
+                    this.mapLayers.weather = L.layerGroup();
+                    
+                    // Capa de corrientes marinas (simulada)
+                    this.mapLayers.currents = L.layerGroup();
+                    
+                    // Añadir capa base por defecto
+                    this.mapLayers.osm.addTo(this.demoMap);
+                    this.currentLayer = 'osm';
+                    
+                    // Añadir marcadores de ejemplo (puertos importantes)
+                    this.addPortMarkers();
+                    
+                    // Añadir rutas de ejemplo
+                    this.addDemoRoutes();
+                    
+                    // Añadir leyenda
+                    this.addMapLegend();
+                } catch (error) {
+                    console.error('Error al inicializar el mapa:', error);
+                }
             }
 
             // Añadir marcadores de puertos
@@ -2139,6 +2208,13 @@
                     {name: "Los Ángeles", lat: 33.75, lng: -118.24, type: "america"},
                     {name: "Nueva York", lat: 40.71, lng: -74.01, type: "america"}
                 ];
+                
+                // Usar MarkerClusterGroup si está disponible
+                if (typeof L.markerClusterGroup !== 'undefined') {
+                    this.markers = L.markerClusterGroup();
+                } else {
+                    this.markers = L.layerGroup();
+                }
                 
                 majorPorts.forEach(port => {
                     const marker = L.marker([port.lat, port.lng], {
@@ -2266,7 +2342,7 @@
 
             // Generar datos de tráfico
             generateTrafficData() {
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 15; i++) { // Reducido para mejor rendimiento
                     const lat = 20 + Math.random() * 40;
                     const lng = -100 + Math.random() * 120;
                     
@@ -2605,6 +2681,12 @@
 
             // Inicializar gráfico de rendimiento
             initializeChart() {
+                // Esperar a que Chart.js esté disponible
+                if (typeof Chart === 'undefined') {
+                    setTimeout(() => this.initializeChart(), 100);
+                    return;
+                }
+                
                 const ctx = document.getElementById('performance-chart').getContext('2d');
                 this.performanceChart = new Chart(ctx, {
                     type: 'line',
@@ -2668,9 +2750,15 @@
 
             // Inicializar partículas en el hero
             initParticles() {
+                // Esperar a que particlesJS esté disponible
+                if (typeof particlesJS === 'undefined') {
+                    setTimeout(() => this.initParticles(), 100);
+                    return;
+                }
+                
                 particlesJS('particles-js', {
                     particles: {
-                        number: { value: 60, density: { enable: true, value_area: 800 } },
+                        number: { value: 40, density: { enable: true, value_area: 800 } }, // Reducido para mejor rendimiento
                         color: { value: "#ffffff" },
                         shape: { type: "circle" },
                         opacity: { value: 0.5, random: true },
@@ -2758,9 +2846,6 @@
             cleanup() {
                 if (this.simulationInterval) {
                     clearInterval(this.simulationInterval);
-                }
-                if (this.animationFrameId) {
-                    cancelAnimationFrame(this.animationFrameId);
                 }
             }
         }
