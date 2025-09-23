@@ -1792,393 +1792,480 @@
     </div>
 
     <script>
-        // Inicialización cuando el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ocultar loader cuando todo esté listo
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 3000);
-            
-            // Inicializar funcionalidades
-            initializePlatform();
-            setupNavigation();
-            setupDemo();
-            initializeChart();
-            initParticles();
-            setupThemeToggle();
-            setupLogoUpload();
-            setupPersonalizationPanel();
-        });
-        
-        // Variables globales para el mapa y capas
-        let demoMap, mapLayers = {}, currentLayer = 'osm', markers = L.markerClusterGroup();
-        
-        function initializePlatform() {
-            // Aquí inicializaremos todas las funcionalidades de la plataforma
-            console.log("Plataforma Nautilus AI Enterprise inicializada");
-            
-            // Simular datos en tiempo real
-            simulateRealTimeData();
-        }
-        
-        function setupNavigation() {
-            const menuBtn = document.getElementById('menu-btn');
-            const navMenu = document.getElementById('nav-menu');
-            
-            menuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('show');
-                menuBtn.innerHTML = navMenu.classList.contains('show') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars'></i>';
-            });
-            
-            // Smooth scrolling para enlaces de navegación
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    if (this.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href');
-                        const targetElement = document.querySelector(targetId);
-                        
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
+        // Clase principal para gestionar la plataforma Nautilus AI
+        class NautilusPlatform {
+            constructor() {
+                this.demoMap = null;
+                this.mapLayers = {};
+                this.currentLayer = 'osm';
+                this.markers = L.markerClusterGroup();
+                this.performanceChart = null;
+                this.isDarkMode = false;
+                this.animationFrameId = null;
+                this.simulationInterval = null;
+            }
+
+            // Inicializar la plataforma
+            init() {
+                this.setupLoader();
+                this.setupNavigation();
+                this.setupThemeToggle();
+                this.setupPersonalizationPanel();
+                this.setupLogoUpload();
+                this.setupDemo();
+                this.initializeChart();
+                this.initParticles();
+                this.startRealTimeSimulation();
+                
+                // Configurar animaciones automáticas
+                this.setupAutoAnimations();
+            }
+
+            // Configurar el loader
+            setupLoader() {
+                // Simular carga de recursos
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                    this.showNotification('Plataforma Nautilus AI Enterprise cargada correctamente');
+                }, 3000);
+            }
+
+            // Configurar navegación
+            setupNavigation() {
+                const menuBtn = document.getElementById('menu-btn');
+                const navMenu = document.getElementById('nav-menu');
+                
+                menuBtn.addEventListener('click', () => {
+                    navMenu.classList.toggle('show');
+                    menuBtn.innerHTML = navMenu.classList.contains('show') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                // Smooth scrolling para enlaces de navegación
+                document.querySelectorAll('nav a').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        if (this.getAttribute('href').startsWith('#')) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute('href');
+                            const targetElement = document.querySelector(targetId);
                             
-                            // Cerrar menú móvil después de hacer clic
-                            if (navMenu.classList.contains('show')) {
-                                navMenu.classList.remove('show');
-                                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                            if (targetElement) {
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 100,
+                                    behavior: 'smooth'
+                                });
+                                
+                                // Cerrar menú móvil después de hacer clic
+                                if (navMenu.classList.contains('show')) {
+                                    navMenu.classList.remove('show');
+                                    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                                }
                             }
                         }
-                    }
+                    });
                 });
-            });
-        }
-        
-        function setupThemeToggle() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const icon = themeToggle.querySelector('i');
-            
-            // Comprobar preferencia del usuario
-            if (localStorage.getItem('theme') === 'dark' || 
-                (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
             }
-            
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
+
+            // Configurar toggle de tema
+            setupThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const icon = themeToggle.querySelector('i');
                 
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
+                // Comprobar preferencia del usuario
+                if (localStorage.getItem('theme') === 'dark' || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+                    document.body.classList.add('dark-mode');
+                    this.isDarkMode = true;
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
                 }
-            });
-        }
-        
-        // Configuración del panel de personalización lateral
-        function setupPersonalizationPanel() {
-            const panel = document.getElementById('personalization-panel');
-            const toggler = document.getElementById('panel-toggler');
-            const closeBtn = document.getElementById('close-panel');
-            
-            toggler.addEventListener('click', () => {
-                panel.classList.add('open');
-            });
-            
-            closeBtn.addEventListener('click', () => {
-                panel.classList.remove('open');
-            });
-            
-            // Cerrar panel al hacer clic fuera de él
-            document.addEventListener('click', (e) => {
-                if (panel.classList.contains('open') && 
-                    !panel.contains(e.target) && 
-                    e.target !== toggler) {
-                    panel.classList.remove('open');
-                }
-            });
-        }
-        
-        function setupLogoUpload() {
-            const logoUpload = document.getElementById('logo-upload');
-            const logoPreview = document.getElementById('logo-preview');
-            const customLogo = document.getElementById('custom-logo');
-            
-            logoUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
+                
+                themeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    this.isDarkMode = document.body.classList.contains('dark-mode');
                     
-                    reader.onload = function(e) {
-                        const logoUrl = e.target.result;
-                        logoPreview.innerHTML = `<img src="${logoUrl}" alt="Logo personalizado">`;
-                        customLogo.src = logoUrl;
+                    if (this.isDarkMode) {
+                        localStorage.setItem('theme', 'dark');
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                    
+                    // Actualizar el mapa si existe
+                    if (this.demoMap) {
+                        setTimeout(() => {
+                            this.demoMap.invalidateSize();
+                        }, 300);
+                    }
+                });
+            }
+
+            // Configurar panel de personalización
+            setupPersonalizationPanel() {
+                const panel = document.getElementById('personalization-panel');
+                const toggler = document.getElementById('panel-toggler');
+                const closeBtn = document.getElementById('close-panel');
+                
+                toggler.addEventListener('click', () => {
+                    panel.classList.add('open');
+                });
+                
+                closeBtn.addEventListener('click', () => {
+                    panel.classList.remove('open');
+                });
+                
+                // Cerrar panel al hacer clic fuera de él
+                document.addEventListener('click', (e) => {
+                    if (panel.classList.contains('open') && 
+                        !panel.contains(e.target) && 
+                        e.target !== toggler) {
+                        panel.classList.remove('open');
+                    }
+                });
+            }
+
+            // Configurar carga de logo
+            setupLogoUpload() {
+                const logoUpload = document.getElementById('logo-upload');
+                const logoPreview = document.getElementById('logo-preview');
+                const customLogo = document.getElementById('custom-logo');
+                
+                logoUpload.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
                         
-                        // Ajustar el logo en el header para que se vea completo
-                        customLogo.onload = function() {
-                            adjustLogoSize(customLogo);
+                        reader.onload = function(e) {
+                            const logoUrl = e.target.result;
+                            logoPreview.innerHTML = `<img src="${logoUrl}" alt="Logo personalizado">`;
+                            customLogo.src = logoUrl;
+                            
+                            // Ajustar el logo en el header para que se vea completo
+                            customLogo.onload = function() {
+                                platform.adjustLogoSize(customLogo);
+                            };
+                            
+                            // Guardar en localStorage para persistencia
+                            localStorage.setItem('customLogo', logoUrl);
+                            
+                            // Mostrar notificación
+                            platform.showNotification('Logo actualizado correctamente');
                         };
                         
-                        // Guardar en localStorage para persistencia
-                        localStorage.setItem('customLogo', logoUrl);
-                        
-                        // Mostrar notificación
-                        showNotification('Logo actualizado correctamente');
-                    };
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // Cargar logo guardado si existe
-            const savedLogo = localStorage.getItem('customLogo');
-            if (savedLogo) {
-                logoPreview.innerHTML = `<img src="${savedLogo}" alt="Logo personalizado">`;
-                customLogo.src = savedLogo;
-                
-                // Ajustar el logo cuando se cargue
-                customLogo.onload = function() {
-                    adjustLogoSize(customLogo);
-                };
-            }
-        }
-        
-        // Función para ajustar el tamaño del logo en el header
-        function adjustLogoSize(imgElement) {
-            const container = imgElement.parentElement;
-            const naturalWidth = imgElement.naturalWidth;
-            const naturalHeight = imgElement.naturalHeight;
-            const aspectRatio = naturalWidth / naturalHeight;
-            
-            // Ajustar según la relación de aspecto para que no se deforme
-            if (aspectRatio > 3) {
-                // Logo muy ancho - limitar ancho
-                imgElement.style.width = '180px';
-                imgElement.style.height = 'auto';
-            } else if (aspectRatio < 1) {
-                // Logo muy alto - limitar altura
-                imgElement.style.width = 'auto';
-                imgElement.style.height = '40px';
-            } else {
-                // Logo proporcionado - usar altura completa
-                imgElement.style.width = 'auto';
-                imgElement.style.height = '40px';
-            }
-        }
-        
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notification-text');
-            
-            notificationText.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        function setupDemo() {
-            // Configurar el control de carga
-            const cargoLoad = document.getElementById('cargo-load');
-            const cargoValue = document.getElementById('cargo-value');
-            
-            cargoLoad.addEventListener('input', () => {
-                cargoValue.textContent = cargoLoad.value + '%';
-            });
-            
-            // Configurar el botón de cálculo
-            document.getElementById('calculate-btn').addEventListener('click', calculateOptimization);
-            
-            // Configurar cambios en los selects
-            document.getElementById('route-select').addEventListener('change', updateDemoMap);
-            document.getElementById('vessel-type').addEventListener('change', updateResults);
-            document.getElementById('weather-conditions').addEventListener('change', updateResults);
-            
-            // Configurar botones de capas del mapa
-            document.querySelectorAll('.map-layer-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const layer = this.getAttribute('data-layer');
-                    switchMapLayer(layer);
-                    
-                    // Actualizar estado activo de los botones
-                    document.querySelectorAll('.map-layer-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+                        reader.readAsDataURL(file);
+                    }
                 });
-            });
-            
-            // Inicializar mapa
-            initializeDemoMap();
-        }
-        
-        function initializeDemoMap() {
-            // Inicializar el mapa de demostración
-            demoMap = L.map('demo-map', {
-                zoomControl: false,
-                minZoom: 2,
-                maxBounds: [[-90, -180], [90, 180]],
-                maxBoundsViscosity: 1.0
-            }).setView([25, 0], 2);
-            
-            // Añadir control de zoom
-            L.control.zoom({
-                position: 'topright'
-            }).addTo(demoMap);
-            
-            // Configuración de capas base
-            mapLayers.osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 19
-            });
-            
-            mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '© Esri',
-                maxZoom: 19
-            });
-            
-            // Capa de tráfico marítimo (simulada con marcadores)
-            mapLayers.traffic = L.layerGroup();
-            
-            // Capa de condiciones meteorológicas (simulada)
-            mapLayers.weather = L.layerGroup();
-            
-            // Capa de corrientes marinas (simulada)
-            mapLayers.currents = L.layerGroup();
-            
-            // Añadir capa base por defecto
-            mapLayers.osm.addTo(demoMap);
-            currentLayer = 'osm';
-            
-            // Añadir marcadores de ejemplo (puertos importantes)
-            const majorPorts = [
-                {name: "Singapur", lat: 1.27, lng: 103.83, type: "asia"},
-                {name: "Shanghái", lat: 31.23, lng: 121.47, type: "asia"},
-                {name: "Róterdam", lat: 51.92, lng: 4.48, type: "europe"},
-                {name: "Hamburgo", lat: 53.55, lng: 9.99, type: "europe"},
-                {name: "Los Ángeles", lat: 33.75, lng: -118.24, type: "america"},
-                {name: "Nueva York", lat: 40.71, lng: -74.01, type: "america"}
-            ];
-            
-            majorPorts.forEach(port => {
-                const marker = L.marker([port.lat, port.lng], {
-                    icon: L.divIcon({
-                        className: `port-marker port-${port.type}`,
-                        html: `<i class="fas fa-anchor"></i>`,
-                        iconSize: [30, 30]
-                    })
-                }).bindPopup(`<strong>${port.name}</strong><br>Puerto principal`);
                 
-                markers.addLayer(marker);
-            });
-            
-            demoMap.addLayer(markers);
-            
-            // Añadir rutas de ejemplo
-            addDemoRoutes();
-            
-            // Añadir leyenda
-            const legend = L.control({position: 'bottomright'});
-            legend.onAdd = function(map) {
-                const div = L.DomUtil.create('div', 'map-legend');
-                div.innerHTML = `
-                    <h4>Leyenda</h4>
-                    <div><span class="legend-icon port-asia"></span> Puertos Asia</div>
-                    <div><span class="legend-icon port-europe"></span> Puertos Europa</div>
-                    <div><span class="legend-icon port-america"></span> Puertos América</div>
-                    <div><span class="legend-icon route-optimized"></span> Ruta Optimizada</div>
-                    <div><span class="legend-icon route-standard"></span> Ruta Estándar</div>
-                `;
-                return div;
-            };
-            legend.addTo(demoMap);
-            
-            // Añadir estilo a la leyenda
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .map-legend {
-                    background: white;
-                    padding: 10px;
-                    border-radius: 5px;
-                    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                // Cargar logo guardado si existe
+                const savedLogo = localStorage.getItem('customLogo');
+                if (savedLogo) {
+                    logoPreview.innerHTML = `<img src="${savedLogo}" alt="Logo personalizado">`;
+                    customLogo.src = savedLogo;
+                    
+                    // Ajustar el logo cuando se cargue
+                    customLogo.onload = function() {
+                        platform.adjustLogoSize(customLogo);
+                    };
                 }
-                .map-legend h4 {
-                    margin: 0 0 10px;
-                }
-                .map-legend div {
-                    margin-bottom: 5px;
-                    display: flex;
-                    align-items: center;
-                }
-                .legend-icon {
-                    display: inline-block;
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 8px;
-                    border-radius: 50%;
-                }
-                .port-asia { background: #ef4444; }
-                .port-europe { background: #3b82f6; }
-                .port-america { background: #10b981; }
-                .route-optimized { 
-                    background: linear-gradient(to right, transparent 50%, #08c792 50%);
-                    border-radius: 0;
-                }
-                .route-standard { 
-                    background: linear-gradient(to right, transparent 50%, #6b7280 50%);
-                    border-radius: 0;
-                }
-                .port-marker {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    color: white;
-                    font-size: 14px;
-                    text-align: center;
-                }
-                .port-asia { background-color: #ef4444; }
-                .port-europe { background-color: #3b82f6; }
-                .port-america { background-color: #10b981; }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        function switchMapLayer(layer) {
-            // Remover capa actual
-            if (mapLayers[currentLayer]) {
-                if (currentLayer === 'osm' || currentLayer === 'satellite') {
-                    demoMap.removeLayer(mapLayers[currentLayer]);
+            }
+
+            // Ajustar tamaño del logo
+            adjustLogoSize(imgElement) {
+                const container = imgElement.parentElement;
+                const naturalWidth = imgElement.naturalWidth;
+                const naturalHeight = imgElement.naturalHeight;
+                const aspectRatio = naturalWidth / naturalHeight;
+                
+                // Ajustar según la relación de aspecto para que no se deforme
+                if (aspectRatio > 3) {
+                    // Logo muy ancho - limitar ancho
+                    imgElement.style.width = '180px';
+                    imgElement.style.height = 'auto';
+                } else if (aspectRatio < 1) {
+                    // Logo muy alto - limitar altura
+                    imgElement.style.width = 'auto';
+                    imgElement.style.height = '40px';
                 } else {
-                    mapLayers[currentLayer].removeFrom(demoMap);
+                    // Logo proporcionado - usar altura completa
+                    imgElement.style.width = 'auto';
+                    imgElement.style.height = '40px';
                 }
             }
-            
-            // Añadir nueva capa
-            if (layer === 'osm' || layer === 'satellite') {
-                mapLayers[layer].addTo(demoMap);
-            } else {
-                // Para capas especiales, añadir y generar datos
-                mapLayers[layer].addTo(demoMap);
-                generateLayerData(layer);
+
+            // Mostrar notificación
+            showNotification(message, type = 'success') {
+                const notification = document.getElementById('notification');
+                const notificationText = document.getElementById('notification-text');
+                const icon = notification.querySelector('i');
+                
+                // Cambiar icono según el tipo
+                if (type === 'error') {
+                    icon.className = 'fas fa-exclamation-circle';
+                    notification.style.background = 'var(--gradient-5g)';
+                } else if (type === 'warning') {
+                    icon.className = 'fas fa-exclamation-triangle';
+                    notification.style.background = 'var(--gradient-5g)';
+                } else {
+                    icon.className = 'fas fa-check-circle';
+                    notification.style.background = 'var(--gradient-enterprise)';
+                }
+                
+                notificationText.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
             }
-            
-            currentLayer = layer;
-        }
-        
-        function generateLayerData(layer) {
-            // Limpiar capa primero
-            mapLayers[layer].clearLayers();
-            
-            if (layer === 'traffic') {
-                // Generar tráfico marítimo simulado
+
+            // Configurar la demo
+            setupDemo() {
+                // Configurar el control de carga
+                const cargoLoad = document.getElementById('cargo-load');
+                const cargoValue = document.getElementById('cargo-value');
+                
+                cargoLoad.addEventListener('input', () => {
+                    cargoValue.textContent = cargoLoad.value + '%';
+                    // Actualización en tiempo real
+                    this.updateResults();
+                });
+                
+                // Configurar el botón de cálculo
+                document.getElementById('calculate-btn').addEventListener('click', () => {
+                    this.calculateOptimization();
+                });
+                
+                // Configurar cambios en los selects
+                document.getElementById('route-select').addEventListener('change', () => {
+                    this.updateDemoMap();
+                    this.updateResults();
+                });
+                document.getElementById('vessel-type').addEventListener('change', () => {
+                    this.updateResults();
+                });
+                document.getElementById('weather-conditions').addEventListener('change', () => {
+                    this.updateResults();
+                });
+                
+                // Configurar botones de capas del mapa
+                document.querySelectorAll('.map-layer-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const layer = this.getAttribute('data-layer');
+                        platform.switchMapLayer(layer);
+                        
+                        // Actualizar estado activo de los botones
+                        document.querySelectorAll('.map-layer-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                
+                // Configurar botones de tecnología
+                document.getElementById('toggle-satellite').addEventListener('click', () => {
+                    this.toggleTechnology('satellite');
+                });
+                document.getElementById('toggle-iot').addEventListener('click', () => {
+                    this.toggleTechnology('iot');
+                });
+                document.getElementById('toggle-5g').addEventListener('click', () => {
+                    this.toggleTechnology('5g');
+                });
+                
+                // Inicializar mapa
+                this.initializeDemoMap();
+                
+                // Calcular optimización inicial
+                this.calculateOptimization();
+            }
+
+            // Inicializar el mapa de demostración
+            initializeDemoMap() {
+                // Inicializar el mapa de demostración
+                this.demoMap = L.map('demo-map', {
+                    zoomControl: false,
+                    minZoom: 2,
+                    maxBounds: [[-90, -180], [90, 180]],
+                    maxBoundsViscosity: 1.0
+                }).setView([25, 0], 2);
+                
+                // Añadir control de zoom
+                L.control.zoom({
+                    position: 'topright'
+                }).addTo(this.demoMap);
+                
+                // Configuración de capas base
+                this.mapLayers.osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                });
+                
+                this.mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: '© Esri',
+                    maxZoom: 19
+                });
+                
+                // Capa de tráfico marítimo (simulada con marcadores)
+                this.mapLayers.traffic = L.layerGroup();
+                
+                // Capa de condiciones meteorológicas (simulada)
+                this.mapLayers.weather = L.layerGroup();
+                
+                // Capa de corrientes marinas (simulada)
+                this.mapLayers.currents = L.layerGroup();
+                
+                // Añadir capa base por defecto
+                this.mapLayers.osm.addTo(this.demoMap);
+                this.currentLayer = 'osm';
+                
+                // Añadir marcadores de ejemplo (puertos importantes)
+                this.addPortMarkers();
+                
+                // Añadir rutas de ejemplo
+                this.addDemoRoutes();
+                
+                // Añadir leyenda
+                this.addMapLegend();
+            }
+
+            // Añadir marcadores de puertos
+            addPortMarkers() {
+                const majorPorts = [
+                    {name: "Singapur", lat: 1.27, lng: 103.83, type: "asia"},
+                    {name: "Shanghái", lat: 31.23, lng: 121.47, type: "asia"},
+                    {name: "Róterdam", lat: 51.92, lng: 4.48, type: "europe"},
+                    {name: "Hamburgo", lat: 53.55, lng: 9.99, type: "europe"},
+                    {name: "Los Ángeles", lat: 33.75, lng: -118.24, type: "america"},
+                    {name: "Nueva York", lat: 40.71, lng: -74.01, type: "america"}
+                ];
+                
+                majorPorts.forEach(port => {
+                    const marker = L.marker([port.lat, port.lng], {
+                        icon: L.divIcon({
+                            className: `port-marker port-${port.type}`,
+                            html: `<i class="fas fa-anchor"></i>`,
+                            iconSize: [30, 30]
+                        })
+                    }).bindPopup(`<strong>${port.name}</strong><br>Puerto principal`);
+                    
+                    this.markers.addLayer(marker);
+                });
+                
+                this.demoMap.addLayer(this.markers);
+            }
+
+            // Añadir leyenda al mapa
+            addMapLegend() {
+                const legend = L.control({position: 'bottomright'});
+                legend.onAdd = function(map) {
+                    const div = L.DomUtil.create('div', 'map-legend');
+                    div.innerHTML = `
+                        <h4>Leyenda</h4>
+                        <div><span class="legend-icon port-asia"></span> Puertos Asia</div>
+                        <div><span class="legend-icon port-europe"></span> Puertos Europa</div>
+                        <div><span class="legend-icon port-america"></span> Puertos América</div>
+                        <div><span class="legend-icon route-optimized"></span> Ruta Optimizada</div>
+                        <div><span class="legend-icon route-standard"></span> Ruta Estándar</div>
+                    `;
+                    return div;
+                };
+                legend.addTo(this.demoMap);
+                
+                // Añadir estilo a la leyenda
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    .map-legend {
+                        background: white;
+                        padding: 10px;
+                        border-radius: 5px;
+                        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                        font-size: 12px;
+                    }
+                    .map-legend h4 {
+                        margin: 0 0 10px;
+                        font-size: 14px;
+                    }
+                    .map-legend div {
+                        margin-bottom: 5px;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .legend-icon {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 8px;
+                        border-radius: 50%;
+                    }
+                    .port-asia { background: #ef4444; }
+                    .port-europe { background: #3b82f6; }
+                    .port-america { background: #10b981; }
+                    .route-optimized { 
+                        background: linear-gradient(to right, transparent 50%, #08c792 50%);
+                        border-radius: 0;
+                    }
+                    .route-standard { 
+                        background: linear-gradient(to right, transparent 50%, #6b7280 50%);
+                        border-radius: 0;
+                    }
+                    .port-marker {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        color: white;
+                        font-size: 14px;
+                        text-align: center;
+                    }
+                    .port-asia { background-color: #ef4444; }
+                    .port-europe { background-color: #3b82f6; }
+                    .port-america { background-color: #10b981; }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Cambiar capa del mapa
+            switchMapLayer(layer) {
+                // Remover capa actual
+                if (this.mapLayers[this.currentLayer]) {
+                    if (this.currentLayer === 'osm' || this.currentLayer === 'satellite') {
+                        this.demoMap.removeLayer(this.mapLayers[this.currentLayer]);
+                    } else {
+                        this.mapLayers[this.currentLayer].removeFrom(this.demoMap);
+                    }
+                }
+                
+                // Añadir nueva capa
+                if (layer === 'osm' || layer === 'satellite') {
+                    this.mapLayers[layer].addTo(this.demoMap);
+                } else {
+                    // Para capas especiales, añadir y generar datos
+                    this.mapLayers[layer].addTo(this.demoMap);
+                    this.generateLayerData(layer);
+                }
+                
+                this.currentLayer = layer;
+            }
+
+            // Generar datos para capas especiales
+            generateLayerData(layer) {
+                // Limpiar capa primero
+                this.mapLayers[layer].clearLayers();
+                
+                if (layer === 'traffic') {
+                    this.generateTrafficData();
+                } else if (layer === 'weather') {
+                    this.generateWeatherData();
+                } else if (layer === 'currents') {
+                    this.generateCurrentsData();
+                }
+                
+                this.addLayerStyles();
+            }
+
+            // Generar datos de tráfico
+            generateTrafficData() {
                 for (let i = 0; i < 20; i++) {
                     const lat = 20 + Math.random() * 40;
                     const lng = -100 + Math.random() * 120;
@@ -2192,10 +2279,12 @@
                     const shipMarker = L.marker([lat, lng], {icon: shipIcon})
                         .bindPopup('Embarcación<br>Velocidad: ' + (10 + Math.random() * 20).toFixed(1) + ' nudos');
                     
-                    mapLayers.traffic.addLayer(shipMarker);
+                    this.mapLayers.traffic.addLayer(shipMarker);
                 }
-            } else if (layer === 'weather') {
-                // Generar datos meteorológicos simulados
+            }
+
+            // Generar datos meteorológicos
+            generateWeatherData() {
                 const weatherData = [
                     {lat: 35, lng: -40, type: 'storm', name: 'Tormenta'},
                     {lat: 20, lng: -60, type: 'cloud', name: 'Nublado'},
@@ -2213,10 +2302,12 @@
                     const marker = L.marker([data.lat, data.lng], {icon: weatherIcon})
                         .bindPopup(`<strong>${data.name}</strong>`);
                     
-                    mapLayers.weather.addLayer(marker);
+                    this.mapLayers.weather.addLayer(marker);
                 });
-            } else if (layer === 'currents') {
-                // Generar corrientes marinas simuladas
+            }
+
+            // Generar datos de corrientes
+            generateCurrentsData() {
                 const currentData = [
                     {lat: 25, lng: -60, direction: 'north', strength: 'fuerte'},
                     {lat: 0, lng: -30, direction: 'west', strength: 'moderada'},
@@ -2234,309 +2325,459 @@
                     const marker = L.marker([data.lat, data.lng], {icon: currentIcon})
                         .bindPopup(`<strong>Corriente ${data.strength}</strong><br>Dirección: ${data.direction}`);
                     
-                    mapLayers.currents.addLayer(marker);
+                    this.mapLayers.currents.addLayer(marker);
                 });
             }
-            
-            // Añadir estilo para los marcadores
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .ship-marker {
-                    color: #3b82f6;
-                    font-size: 18px;
-                    text-align: center;
-                }
-                .weather-marker {
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 16px;
-                }
-                .weather-storm { background-color: #6366f1; }
-                .weather-cloud { background-color: #9ca3af; }
-                .weather-rain { background-color: #60a5fa; }
-                .weather-sun { background-color: #f59e0b; }
-                .current-marker {
-                    background-color: #0891b2;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 14px;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        function addDemoRoutes() {
-            // Rutas de ejemplo para la demo
-            const routes = {
-                'asia-europe': {
-                    optimized: [
-                        [1.35, 103.8], [5.41, 100.33], [13.75, 100.48],
-                        [25.07, 121.56], [35.67, 139.65], [36.12, -5.37], [51.92, 4.48]
-                    ],
-                    standard: [
-                        [1.35, 103.8], [10, 90], [20, 60], [30, 30], 
-                        [40, 0], [45, -10], [51.92, 4.48]
-                    ]
-                },
-                'america-europe': {
-                    optimized: [
-                        [40.71, -74.01], [43.65, -79.38], [51.51, -0.12],
-                        [53.55, 9.99], [55.68, 12.57]
-                    ],
-                    standard: [
-                        [40.71, -74.01], [45, -40], [50, -20], [53, 0],
-                        [55.68, 12.57]
-                    ]
-                },
-                'asia-america': {
-                    optimized: [
-                        [31.23, 121.47], [35.67, 139.65], [37.77, -122.41],
-                        [34.05, -118.24], [32.72, -117.16]
-                    ],
-                    standard: [
-                        [31.23, 121.47], [35, 160], [40, -160], [37, -125],
-                        [32.72, -117.16]
-                    ]
-                }
-            };
-            
-            // Añadir polyline para la ruta actual
-            const currentRoute = routes['asia-europe'];
-            
-            // Ruta optimizada
-            const polylineOptimized = L.polyline(currentRoute.optimized, {
-                color: '#08c792',
-                weight: 5,
-                opacity: 0.9,
-                smoothFactor: 1
-            }).addTo(demoMap);
-            
-            // Ruta estándar
-            const polylineStandard = L.polyline(currentRoute.standard, {
-                color: '#6b7280',
-                weight: 3,
-                opacity: 0.7,
-                dashArray: '10, 10',
-                smoothFactor: 1
-            }).addTo(demoMap);
-            
-            // Ajustar la vista para mostrar la ruta
-            demoMap.fitBounds(polylineOptimized.getBounds());
-        }
-        
-        function updateDemoMap() {
-            // Actualizar el mapa según la ruta seleccionada
-            const route = document.getElementById('route-select').value;
-            console.log("Actualizando mapa con ruta: " + route);
-            
-            // En una implementación real, aquí se actualizaría el mapa con la nueva ruta
-        }
-        
-        function calculateOptimization() {
-            // Simular cálculo de optimización
-            const route = document.getElementById('route-select').value;
-            const vessel = document.getElementById('vessel-type').value;
-            const weather = document.getElementById('weather-conditions').value;
-            const cargoLoad = parseInt(document.getElementById('cargo-load').value);
-            
-            // Resultados basados en las selecciones
-            const baseResults = {
-                'asia-europe': { fuel: 26.8, emission: 32.5, time: 19.7, carbon: 68500 },
-                'america-europe': { fuel: 22.2, emission: 27.7, time: 16.3, carbon: 57500 },
-                'asia-america': { fuel: 24.8, emission: 30.5, time: 17.2, carbon: 63200 },
-                'transpacific': { fuel: 25.3, emission: 31.0, time: 17.8, carbon: 65100 }
-            };
-            
-            const results = { ...baseResults[route] };
-            
-            // Ajustar basado en tipo de buque
-            const vesselFactors = {
-                'container': { fuel: 1.0, emission: 1.0 },
-                'bulk': { fuel: 0.9, emission: 0.95 },
-                'tanker': { fuel: 1.1, emission: 1.15 },
-                'lng': { fuel: 0.85, emission: 0.8 }
-            };
-            
-            const factor = vesselFactors[vessel];
-            results.fuel *= factor.fuel;
-            results.emission *= factor.emission;
-            
-            // Ajustar basado en condiciones climáticas
-            const weatherFactors = {
-                'optimal': 1.1,
-                'moderate': 1.0,
-                'adverse': 0.9,
-                'storm': 0.8
-            };
-            
-            const weatherFactor = weatherFactors[weather];
-            results.fuel *= weatherFactor;
-            results.emission *= weatherFactor;
-            
-            // Ajustar basado en carga
-            const cargoFactor = 0.8 + (cargoLoad / 100 * 0.4);
-            results.fuel *= cargoFactor;
-            results.emission *= cargoFactor;
-            
-            // Añadir factor aleatorio para simular datos reales
-            const randomFactor = 0.95 + (Math.random() * 0.1);
-            results.fuel *= randomFactor;
-            results.emission *= randomFactor;
-            
-            // Actualizar UI
-            updateResultsUI(results);
-            
-            // Animación de resultados
-            highlightResults();
-            
-            // Mostrar notificación
-            showNotification('Optimización calculada con éxito');
-        }
-        
-        function updateResults() {
-            // Actualización en tiempo real de resultados
-            calculateOptimization();
-        }
-        
-        function updateResultsUI(results) {
-            document.getElementById('fuel-saving').textContent = results.fuel.toFixed(1) + '%';
-            document.getElementById('emission-reduction').textContent = results.emission.toFixed(1) + '%';
-            document.getElementById('time-optimization').textContent = results.time.toFixed(1) + '%';
-            document.getElementById('carbon-value').textContent = '$' + Math.round(results.carbon).toLocaleString();
-        }
-        
-        function highlightResults() {
-            const results = document.querySelectorAll('.result-value');
-            results.forEach(result => {
-                result.style.transition = 'all 0.5s';
-                result.style.transform = 'scale(1.15)';
-                result.style.color = '#08c792';
-                
-                setTimeout(() => {
-                    result.style.transform = 'scale(1)';
-                    result.style.color = '';
-                }, 500);
-            });
-        }
-        
-        function initializeChart() {
-            const ctx = document.getElementById('performance-chart').getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                    datasets: [
-                        {
-                            label: 'Ahorro de Combustible (%)',
-                            data: [22, 26, 24, 28, 27, 30],
-                            borderColor: '#08c792',
-                            backgroundColor: 'rgba(8, 199, 146, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        },
-                        {
-                            label: 'Reducción de Emisiones (%)',
-                            data: [20, 24, 27, 30, 32, 35],
-                            borderColor: '#7c3aed',
-                            backgroundColor: 'rgba(124, 58, 237, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        },
-                        {
-                            label: 'Optimización de Tiempo (%)',
-                            data: [17, 20, 18, 22, 24, 27],
-                            borderColor: '#fbbf24',
-                            backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
-                }
-            });
 
-            // Simular actualización de datos en tiempo real
-            setInterval(() => {
-                chart.data.datasets.forEach(dataset => {
-                    dataset.data = dataset.data.map(value => {
-                        return Math.max(15, value + (Math.random() * 4 - 2));
-                    });
-                });
-                chart.update('none');
-            }, 5000);
-        }
-        
-        function initParticles() {
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 60, density: { enable: true, value_area: 800 } },
-                    color: { value: "#ffffff" },
-                    shape: { type: "circle" },
-                    opacity: { value: 0.5, random: true },
-                    size: { value: 3, random: true },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#ffffff",
-                        opacity: 0.4,
-                        width: 1
+            // Añadir estilos para las capas
+            addLayerStyles() {
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    .ship-marker {
+                        color: #3b82f6;
+                        font-size: 18px;
+                        text-align: center;
+                    }
+                    .weather-marker {
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 16px;
+                    }
+                    .weather-storm { background-color: #6366f1; }
+                    .weather-cloud { background-color: #9ca3af; }
+                    .weather-rain { background-color: #60a5fa; }
+                    .weather-sun { background-color: #f59e0b; }
+                    .current-marker {
+                        background-color: #0891b2;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 14px;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Añadir rutas de demostración
+            addDemoRoutes() {
+                // Rutas de ejemplo para la demo
+                const routes = {
+                    'asia-europe': {
+                        optimized: [
+                            [1.35, 103.8], [5.41, 100.33], [13.75, 100.48],
+                            [25.07, 121.56], [35.67, 139.65], [36.12, -5.37], [51.92, 4.48]
+                        ],
+                        standard: [
+                            [1.35, 103.8], [10, 90], [20, 60], [30, 30], 
+                            [40, 0], [45, -10], [51.92, 4.48]
+                        ]
                     },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false
+                    'america-europe': {
+                        optimized: [
+                            [40.71, -74.01], [43.65, -79.38], [51.51, -0.12],
+                            [53.55, 9.99], [55.68, 12.57]
+                        ],
+                        standard: [
+                            [40.71, -74.01], [45, -40], [50, -20], [53, 0],
+                            [55.68, 12.57]
+                        ]
+                    },
+                    'asia-america': {
+                        optimized: [
+                            [31.23, 121.47], [35.67, 139.65], [37.77, -122.41],
+                            [34.05, -118.24], [32.72, -117.16]
+                        ],
+                        standard: [
+                            [31.23, 121.47], [35, 160], [40, -160], [37, -125],
+                            [32.72, -117.16]
+                        ]
+                    },
+                    'transpacific': {
+                        optimized: [
+                            [35.67, 139.65], [40, 150], [30, -160], [37.77, -122.41]
+                        ],
+                        standard: [
+                            [35.67, 139.65], [45, 180], [40, -140], [37.77, -122.41]
+                        ]
                     }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "grab" },
-                        onclick: { enable: true, mode: "push" },
-                        resize: true
+                };
+                
+                // Añadir polyline para la ruta actual
+                const currentRoute = routes['asia-europe'];
+                
+                // Ruta optimizada
+                this.optimizedRoute = L.polyline(currentRoute.optimized, {
+                    color: '#08c792',
+                    weight: 5,
+                    opacity: 0.9,
+                    smoothFactor: 1
+                }).addTo(this.demoMap);
+                
+                // Ruta estándar
+                this.standardRoute = L.polyline(currentRoute.standard, {
+                    color: '#6b7280',
+                    weight: 3,
+                    opacity: 0.7,
+                    dashArray: '10, 10',
+                    smoothFactor: 1
+                }).addTo(this.demoMap);
+                
+                // Ajustar la vista para mostrar la ruta
+                this.demoMap.fitBounds(this.optimizedRoute.getBounds());
+            }
+
+            // Actualizar el mapa de demostración
+            updateDemoMap() {
+                const route = document.getElementById('route-select').value;
+                const routes = {
+                    'asia-europe': {
+                        optimized: [
+                            [1.35, 103.8], [5.41, 100.33], [13.75, 100.48],
+                            [25.07, 121.56], [35.67, 139.65], [36.12, -5.37], [51.92, 4.48]
+                        ],
+                        standard: [
+                            [1.35, 103.8], [10, 90], [20, 60], [30, 30], 
+                            [40, 0], [45, -10], [51.92, 4.48]
+                        ]
+                    },
+                    'america-europe': {
+                        optimized: [
+                            [40.71, -74.01], [43.65, -79.38], [51.51, -0.12],
+                            [53.55, 9.99], [55.68, 12.57]
+                        ],
+                        standard: [
+                            [40.71, -74.01], [45, -40], [50, -20], [53, 0],
+                            [55.68, 12.57]
+                        ]
+                    },
+                    'asia-america': {
+                        optimized: [
+                            [31.23, 121.47], [35.67, 139.65], [37.77, -122.41],
+                            [34.05, -118.24], [32.72, -117.16]
+                        ],
+                        standard: [
+                            [31.23, 121.47], [35, 160], [40, -160], [37, -125],
+                            [32.72, -117.16]
+                        ]
+                    },
+                    'transpacific': {
+                        optimized: [
+                            [35.67, 139.65], [40, 150], [30, -160], [37.77, -122.41]
+                        ],
+                        standard: [
+                            [35.67, 139.65], [45, 180], [40, -140], [37.77, -122.41]
+                        ]
                     }
-                },
-                retina_detect: true
-            });
-        }
-        
-        function simulateRealTimeData() {
-            // Simular datos en tiempo real para la plataforma
-            setInterval(() => {
-                // Actualizar indicadores de datos en tiempo real
-                const indicators = document.querySelectorAll('.stat-value');
-                indicators.forEach(indicator => {
-                    const currentValue = parseFloat(indicator.textContent);
-                    const newValue = currentValue + (Math.random() - 0.5) * 0.5;
-                    indicator.textContent = newValue.toFixed(1);
+                };
+                
+                // Actualizar rutas
+                if (this.optimizedRoute) this.demoMap.removeLayer(this.optimizedRoute);
+                if (this.standardRoute) this.demoMap.removeLayer(this.standardRoute);
+                
+                const selectedRoute = routes[route];
+                
+                this.optimizedRoute = L.polyline(selectedRoute.optimized, {
+                    color: '#08c792',
+                    weight: 5,
+                    opacity: 0.9,
+                    smoothFactor: 1
+                }).addTo(this.demoMap);
+                
+                this.standardRoute = L.polyline(selectedRoute.standard, {
+                    color: '#6b7280',
+                    weight: 3,
+                    opacity: 0.7,
+                    dashArray: '10, 10',
+                    smoothFactor: 1
+                }).addTo(this.demoMap);
+                
+                // Ajustar la vista
+                this.demoMap.fitBounds(this.optimizedRoute.getBounds());
+            }
+
+            // Alternar tecnología
+            toggleTechnology(tech) {
+                const button = document.getElementById(`toggle-${tech}`);
+                const isActive = button.classList.contains('active');
+                
+                if (isActive) {
+                    button.classList.remove('active');
+                    this.showNotification(`${tech.toUpperCase()} desactivado`, 'warning');
+                } else {
+                    button.classList.add('active');
+                    this.showNotification(`${tech.toUpperCase()} activado`);
+                }
+            }
+
+            // Calcular optimización
+            calculateOptimization() {
+                const route = document.getElementById('route-select').value;
+                const vessel = document.getElementById('vessel-type').value;
+                const weather = document.getElementById('weather-conditions').value;
+                const cargoLoad = parseInt(document.getElementById('cargo-load').value);
+                
+                // Resultados basados en las selecciones
+                const baseResults = {
+                    'asia-europe': { fuel: 26.8, emission: 32.5, time: 19.7, carbon: 68500 },
+                    'america-europe': { fuel: 22.2, emission: 27.7, time: 16.3, carbon: 57500 },
+                    'asia-america': { fuel: 24.8, emission: 30.5, time: 17.2, carbon: 63200 },
+                    'transpacific': { fuel: 25.3, emission: 31.0, time: 17.8, carbon: 65100 }
+                };
+                
+                const results = { ...baseResults[route] };
+                
+                // Ajustar basado en tipo de buque
+                const vesselFactors = {
+                    'container': { fuel: 1.0, emission: 1.0 },
+                    'bulk': { fuel: 0.9, emission: 0.95 },
+                    'tanker': { fuel: 1.1, emission: 1.15 },
+                    'lng': { fuel: 0.85, emission: 0.8 }
+                };
+                
+                const factor = vesselFactors[vessel];
+                results.fuel *= factor.fuel;
+                results.emission *= factor.emission;
+                
+                // Ajustar basado en condiciones climáticas
+                const weatherFactors = {
+                    'optimal': 1.1,
+                    'moderate': 1.0,
+                    'adverse': 0.9,
+                    'storm': 0.8
+                };
+                
+                const weatherFactor = weatherFactors[weather];
+                results.fuel *= weatherFactor;
+                results.emission *= weatherFactor;
+                
+                // Ajustar basado en carga
+                const cargoFactor = 0.8 + (cargoLoad / 100 * 0.4);
+                results.fuel *= cargoFactor;
+                results.emission *= cargoFactor;
+                
+                // Añadir factor aleatorio para simular datos reales
+                const randomFactor = 0.95 + (Math.random() * 0.1);
+                results.fuel *= randomFactor;
+                results.emission *= randomFactor;
+                
+                // Actualizar UI
+                this.updateResultsUI(results);
+                
+                // Animación de resultados
+                this.highlightResults();
+                
+                // Mostrar notificación
+                this.showNotification('Optimización calculada con éxito');
+            }
+
+            // Actualizar resultados
+            updateResults() {
+                this.calculateOptimization();
+            }
+
+            // Actualizar la UI de resultados
+            updateResultsUI(results) {
+                document.getElementById('fuel-saving').textContent = results.fuel.toFixed(1) + '%';
+                document.getElementById('emission-reduction').textContent = results.emission.toFixed(1) + '%';
+                document.getElementById('time-optimization').textContent = results.time.toFixed(1) + '%';
+                document.getElementById('carbon-value').textContent = '$' + Math.round(results.carbon).toLocaleString();
+            }
+
+            // Destacar resultados con animación
+            highlightResults() {
+                const results = document.querySelectorAll('.result-value');
+                results.forEach(result => {
+                    result.style.transition = 'all 0.5s';
+                    result.style.transform = 'scale(1.15)';
+                    result.style.color = '#08c792';
+                    
+                    setTimeout(() => {
+                        result.style.transform = 'scale(1)';
+                        result.style.color = '';
+                    }, 500);
                 });
-            }, 5000);
+            }
+
+            // Inicializar gráfico de rendimiento
+            initializeChart() {
+                const ctx = document.getElementById('performance-chart').getContext('2d');
+                this.performanceChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                        datasets: [
+                            {
+                                label: 'Ahorro de Combustible (%)',
+                                data: [22, 26, 24, 28, 27, 30],
+                                borderColor: '#08c792',
+                                backgroundColor: 'rgba(8, 199, 146, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            },
+                            {
+                                label: 'Reducción de Emisiones (%)',
+                                data: [20, 24, 27, 30, 32, 35],
+                                borderColor: '#7c3aed',
+                                backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            },
+                            {
+                                label: 'Optimización de Tiempo (%)',
+                                data: [17, 20, 18, 22, 24, 27],
+                                borderColor: '#fbbf24',
+                                backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Tendencias de Optimización'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Inicializar partículas en el hero
+            initParticles() {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 60, density: { enable: true, value_area: 800 } },
+                        color: { value: "#ffffff" },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.5, random: true },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: "#ffffff",
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: "none",
+                            random: true,
+                            straight: false,
+                            out_mode: "out",
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: { enable: true, mode: "grab" },
+                            onclick: { enable: true, mode: "push" },
+                            resize: true
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            // Iniciar simulación en tiempo real
+            startRealTimeSimulation() {
+                // Simular datos en tiempo real para la plataforma
+                this.simulationInterval = setInterval(() => {
+                    // Actualizar indicadores de datos en tiempo real
+                    const indicators = document.querySelectorAll('.stat-value');
+                    indicators.forEach(indicator => {
+                        const currentValue = parseFloat(indicator.textContent);
+                        const newValue = currentValue + (Math.random() - 0.5) * 0.5;
+                        indicator.textContent = newValue.toFixed(1);
+                    });
+                    
+                    // Actualizar gráfico
+                    if (this.performanceChart) {
+                        this.performanceChart.data.datasets.forEach(dataset => {
+                            dataset.data = dataset.data.map(value => {
+                                return Math.max(15, value + (Math.random() * 4 - 2));
+                            });
+                        });
+                        this.performanceChart.update('none');
+                    }
+                }, 5000);
+            }
+
+            // Configurar animaciones automáticas
+            setupAutoAnimations() {
+                // Animación de aparición de elementos al hacer scroll
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+                
+                // Observar elementos para animación
+                document.querySelectorAll('.tech-card, .dashboard-card, .testimonial-card').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    observer.observe(el);
+                });
+            }
+
+            // Limpiar recursos al cerrar
+            cleanup() {
+                if (this.simulationInterval) {
+                    clearInterval(this.simulationInterval);
+                }
+                if (this.animationFrameId) {
+                    cancelAnimationFrame(this.animationFrameId);
+                }
+            }
         }
+
+        // Inicializar la plataforma cuando el DOM esté listo
+        let platform;
+        document.addEventListener('DOMContentLoaded', function() {
+            platform = new NautilusPlatform();
+            platform.init();
+        });
+
+        // Limpiar recursos al cerrar la página
+        window.addEventListener('beforeunload', () => {
+            if (platform) {
+                platform.cleanup();
+            }
+        });
     </script>
 </body>
 </html>
