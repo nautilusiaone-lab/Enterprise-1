@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nautilus AI Enterprise - Plataforma Avanzada con IA, Satélite, IoT y 5G</title>
+    
+    <!-- Meta tags mejorados para SEO -->
+    <meta name="description" content="Nautilus AI revoluciona la logística marítima con una plataforma integrada que utiliza IA, datos satelitales, IoT y 5G para optimizar rutas, reducir costos y monetizar créditos de carbono.">
+    <meta name="keywords" content="logística marítima, inteligencia artificial, optimización de rutas, IoT, 5G, datos satelitales, reducción de emisiones, créditos de carbono, mantenimiento predictivo, gestión de flotas">
+    <meta name="author" content="Nautilus AI Enterprise">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Nautilus AI Enterprise - Plataforma Avanzada con IA, Satélite, IoT y 5G">
+    <meta property="og:description" content="Revolucionamos la logística marítima con tecnología de vanguardia para optimización inteligente de operaciones.">
+    <meta property="og:type" content="website">
+    
+    <!-- Enlaces a recursos externos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+    
     <style>
+        /* --- Variables CSS Mejoradas --- */
         :root {
             --primary-dark: #0a1f3a;
             --primary: #1e4dd8;
@@ -81,7 +95,7 @@
             padding: 0 15px;
         }
 
-        /* Loader moderno y rápido */
+        /* --- Loader Mejorado --- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -147,7 +161,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
-        /* Header */
+        /* --- Header & Navigation Mejorados --- */
         .enterprise-header {
             background: var(--gradient-enterprise);
             color: white;
@@ -187,7 +201,6 @@
             justify-content: center;
         }
         
-        /* Navigation mejorada */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -219,6 +232,7 @@
             font-size: 1.5rem;
             color: var(--enterprise);
             min-height: 40px;
+            text-decoration: none;
         }
         
         .dark-mode .logo {
@@ -297,7 +311,7 @@
             box-shadow: 0 15px 40px rgba(30, 58, 138, 0.5);
         }
         
-        /* Hero Section mejorada */
+        /* --- Hero Section Mejorada --- */
         .hero-enterprise {
             padding: 120px 0 80px;
             background: linear-gradient(112deg, rgba(10, 31, 58, 0.92) 0%, rgba(30, 58, 138, 0.95) 100%), url('https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
@@ -318,7 +332,7 @@
         .hero-content {
             position: relative;
             z-index: 3;
-            max-width: 100%;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 15px;
         }
@@ -336,14 +350,14 @@
             animation: pulse 2s infinite;
         }
         
-        .hero h1 {
+        .hero-enterprise h1 {
             font-size: 2.5rem;
             margin-bottom: 25px;
             line-height: 1.2;
             font-weight: 900;
         }
         
-        .hero p {
+        .hero-enterprise p {
             font-size: 1.2rem;
             margin: 0 auto 40px;
             opacity: 0.95;
@@ -407,9 +421,9 @@
             color: var(--primary-dark);
         }
         
-        /* Secciones generales */
+        /* --- Secciones Generales Mejoradas --- */
         section {
-            padding: 70px 0;
+            padding: 80px 0;
             width: 100%;
         }
 
@@ -437,21 +451,55 @@
         .section-title p {
             font-size: 1.2rem;
             color: var(--gray);
-            max-width: 100%;
+            max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
             padding: 0 15px;
         }
+
+        /* --- Sección de Prueba Social (NUEVA) --- */
+        .social-proof {
+            padding: 50px 0;
+        }
         
-        /* Tecnología Grid mejorada */
-        .tech-grid {
+        .social-proof h3 {
+            text-align: center;
+            color: var(--gray);
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .logos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .client-logo {
+            height: 40px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+        
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* --- Tecnologías y Soluciones Mejoradas --- */
+        .tech-grid, .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 30px;
             margin-top: 40px;
         }
         
-        .tech-card {
+        .tech-card, .dashboard-card {
             background: white;
             padding: 30px 25px;
             border-radius: 20px;
@@ -463,8 +511,13 @@
             overflow: hidden;
         }
         
-        .dark-mode .tech-card {
+        .dark-mode .tech-card, .dark-mode .dashboard-card {
             background: #1f2937;
+        }
+        
+        .tech-card:hover, .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-3xl);
         }
         
         .tech-card::before {
@@ -477,12 +530,17 @@
             background: var(--gradient-satellite);
         }
         
-        .tech-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-3xl);
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-enterprise);
         }
         
-        .tech-icon {
+        .tech-icon, .dashboard-card i {
             font-size: 3.5rem;
             margin-bottom: 20px;
             height: 80px;
@@ -491,47 +549,52 @@
             justify-content: center;
         }
         
-        .tech-card.satellite .tech-icon {
-            background: var(--gradient-satellite);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .tech-card.iot .tech-icon {
-            background: var(--gradient-iot);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .tech-card.g5 .tech-icon {
-            background: var(--gradient-5g);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .tech-card.neural .tech-icon {
-            background: var(--gradient-neural);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .tech-card h3 {
+        .tech-card h3, .dashboard-card h3 {
             color: var(--primary-dark);
             margin-bottom: 15px;
             font-size: 1.6rem;
             font-weight: 800;
         }
         
-        .tech-card p {
+        .tech-card p, .dashboard-card p {
             color: var(--gray);
             line-height: 1.6;
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
         
+        .tech-card.satellite .tech-icon, .tech-card.iot .tech-icon, 
+        .tech-card.g5 .tech-icon, .tech-card.neural .tech-icon, 
+        .dashboard-card i {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tech-card.satellite .tech-icon {
+            background: var(--gradient-satellite);
+        }
+        
+        .tech-card.iot .tech-icon {
+            background: var(--gradient-iot);
+        }
+        
+        .tech-card.g5 .tech-icon {
+            background: var(--gradient-5g);
+        }
+        
+        .tech-card.neural .tech-icon {
+            background: var(--gradient-neural);
+        }
+        
+        .dashboard-card i {
+            background: var(--gradient-enterprise);
+            font-size: 3rem;
+        }
+        
         .tech-features {
             list-style: none;
             margin-top: 20px;
+            text-align: left;
         }
         
         .tech-features li {
@@ -561,66 +624,6 @@
         
         .tech-card.neural .tech-features li i {
             color: #7e22ce;
-        }
-        
-        /* Dashboard mejorado */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .dashboard-card {
-            background: white;
-            padding: 30px 25px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-2xl);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        
-        .dark-mode .dashboard-card {
-            background: #1f2937;
-        }
-        
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-enterprise);
-        }
-        
-        .dashboard-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-3xl);
-        }
-        
-        .dashboard-card i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: var(--gradient-enterprise);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .dashboard-card h3 {
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-            font-size: 1.6rem;
-            font-weight: 800;
-        }
-        
-        .dashboard-card p {
-            color: var(--gray);
-            line-height: 1.6;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
         }
         
         .stats-grid {
@@ -654,7 +657,7 @@
             font-size: 0.9rem;
         }
         
-        /* Gráfico en tiempo real mejorado */
+        /* --- Gráfico en Tiempo Real Mejorado --- */
         .realtime-chart {
             background: white;
             padding: 30px 20px;
@@ -682,7 +685,7 @@
             width: 100%;
         }
         
-        /* Demo Interactiva mejorada */
+        /* --- Demo Interactiva Mejorada --- */
         .demo-container {
             background: white;
             border-radius: 20px;
@@ -717,8 +720,7 @@
             font-size: 1.1rem;
         }
         
-        .control-group input,
-        .control-group select {
+        .control-group input, .control-group select {
             width: 100%;
             padding: 15px 20px;
             border: 2px solid #e5e7eb;
@@ -728,15 +730,13 @@
             background: white;
         }
         
-        .dark-mode .control-group input,
-        .dark-mode .control-group select {
+        .dark-mode .control-group input, .dark-mode .control-group select {
             background: #374151;
             border-color: #4b5563;
             color: white;
         }
         
-        .control-group input:focus,
-        .control-group select:focus {
+        .control-group input:focus, .control-group select:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 4px rgba(8, 199, 146, 0.1);
@@ -869,9 +869,8 @@
             font-size: 1rem;
         }
         
-        /* Nueva sección de testimonios */
+        /* --- Testimonios Mejorados --- */
         .testimonials {
-            padding: 80px 0;
             background: var(--light-bg);
         }
         
@@ -946,8 +945,58 @@
             color: var(--gray);
             font-size: 0.9rem;
         }
+
+        /* --- Sección de Contacto Mejorada (NUEVA) --- */
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-2xl);
+            max-width: 800px;
+            margin: 0 auto;
+        }
         
-        /* Footer mejorado */
+        .dark-mode .contact-form-container {
+            background: #1f2937;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+        
+        .dark-mode .form-group input, .dark-mode .form-group textarea {
+            background: #374151;
+            border-color: #4b5563;
+            color: white;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* --- Footer Mejorado --- */
         footer.enterprise-footer {
             background: var(--gradient-enterprise);
             color: white;
@@ -1040,7 +1089,7 @@
             font-size: 1rem;
         }
         
-        /* Personalización lateral compacta */
+        /* --- Panel de Personalización Mejorado --- */
         .personalization-panel {
             position: fixed;
             top: 50%;
@@ -1163,7 +1212,7 @@
             text-align: center;
         }
         
-        /* Notifications */
+        /* --- Notificaciones Mejoradas --- */
         .notification {
             position: fixed;
             bottom: 20px;
@@ -1187,13 +1236,13 @@
             opacity: 1;
         }
         
-        /* Responsive mejorado */
+        /* --- Diseño Responsive Mejorado --- */
         @media (min-width: 640px) {
             .container {
                 padding: 0 20px;
             }
             
-            .hero h1 {
+            .hero-enterprise h1 {
                 font-size: 2.8rem;
             }
             
@@ -1206,11 +1255,7 @@
                 width: auto;
             }
             
-            .tech-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .dashboard-grid {
+            .tech-grid, .dashboard-grid, .testimonials-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -1218,12 +1263,16 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .testimonials-grid {
+            .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .footer-content {
+            .form-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-group.full-width {
+                grid-column: 1 / -1;
             }
         }
         
@@ -1232,11 +1281,11 @@
                 max-width: 720px;
             }
             
-            .hero h1 {
+            .hero-enterprise h1 {
                 font-size: 3.2rem;
             }
             
-            .hero p {
+            .hero-enterprise p {
                 font-size: 1.3rem;
             }
             
@@ -1275,7 +1324,7 @@
             }
             
             .footer-content {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: 2fr 1fr 1fr;
             }
         }
         
@@ -1284,7 +1333,7 @@
                 max-width: 1140px;
             }
             
-            .hero h1 {
+            .hero-enterprise h1 {
                 font-size: 3.8rem;
             }
         }
@@ -1338,7 +1387,7 @@
     </style>
 </head>
 <body>
-    <!-- Loader moderno y rápido -->
+    <!-- Loader Mejorado -->
     <div class="loader-container" id="loader">
         <div class="modern-loader">
             <div class="loader-logo"></div>
@@ -1351,432 +1400,206 @@
 
     <!-- Enterprise Header -->
     <div class="enterprise-header">
-        <div>
-            🚀 <strong>NAUTILUS AI ENTERPRISE PLATFORM</strong> - Integrando IA, Satélite, IoT y 5G <span class="header-badge">TECNOLOGÍA AVANZADA</span>
-        </div>
-        <button class="theme-toggle" id="theme-toggle">
-            <i class="fas fa-moon"></i>
-        </button>
+        <div>🚀 <strong>NAUTILUS AI ENTERPRISE PLATFORM</strong> - Integrando IA, Satélite, IoT y 5G <span class="header-badge">TECNOLOGÍA AVANZADA</span></div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
     </div>
 
     <!-- Navigation -->
     <header>
         <div class="container header-content">
-            <div class="logo">
-                <div class="logo-img">
-                    <img src="" alt="Nautilus AI Logo" id="custom-logo">
-                </div>
+            <a href="#inicio" class="logo">
+                <div class="logo-img"><img src="" alt="Nautilus AI Logo" id="custom-logo"></div>
                 <span>Nautilus AI</span>
-            </div>
+            </a>
             <nav>
                 <ul id="nav-menu">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#tecnologias">Tecnologías</a></li>
                     <li><a href="#soluciones">Soluciones</a></li>
                     <li><a href="#demo">Demo</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#contacto" class="cta-button">Solicitar Demo</a></li>
+                    <li><a href="#testimonios">Clientes</a></li>
+                    <li><a href="#contact-section" class="cta-button">Solicitar Demo</a></li>
                 </ul>
-                <button class="mobile-menu-btn" id="menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="mobile-menu-btn" id="menu-btn" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
             </nav>
         </div>
     </header>
 
-    <!-- Panel de personalización lateral -->
+    <!-- Panel de Personalización -->
     <div class="personalization-panel" id="personalization-panel">
-        <div class="panel-toggler" id="panel-toggler">
-            <i class="fas fa-sliders-h"></i>
-        </div>
+        <div class="panel-toggler" id="panel-toggler"><i class="fas fa-sliders-h"></i></div>
         <div class="panel-header">
             <h3>Personalizar Experiencia</h3>
-            <button class="close-panel" id="close-panel">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="close-panel" id="close-panel" aria-label="Cerrar panel"><i class="fas fa-times"></i></button>
         </div>
-        <p>Agrega tu logo para una experiencia personalizada</p>
-        <div class="logo-preview-container" id="logo-preview">
-            <span>Vista previa</span>
-        </div>
+        <p>Agrega tu logo para una experiencia personalizada.</p>
+        <div class="logo-preview-container" id="logo-preview"><span>Vista previa</span></div>
         <input type="file" id="logo-upload" accept="image/*" style="display: none;">
-        <button class="upload-btn" onclick="document.getElementById('logo-upload').click()">
-            <i class="fas fa-upload"></i> Seleccionar Logo
-        </button>
-        <div class="panel-footer">
-            Formatos soportados: JPG, PNG, SVG
-        </div>
+        <button class="upload-btn" onclick="document.getElementById('logo-upload').click()"><i class="fas fa-upload"></i> Seleccionar Logo</button>
+        <div class="panel-footer">Formatos soportados: JPG, PNG, SVG</div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero-enterprise" id="inicio">
-        <div id="particles-js"></div>
-        <div class="container hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-satellite"></i> PLATAFORMA INTEGRADA IA + SATÉLITE + IoT + 5G
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-enterprise" id="inicio">
+            <div id="particles-js"></div>
+            <div class="container hero-content">
+                <div class="hero-badge"><i class="fas fa-satellite"></i> PLATAFORMA INTEGRADA IA + SATÉLITE + IoT + 5G</div>
+                <h1>Revolucionamos la Logística Marítima con Tecnología de Vanguardia</h1>
+                <p>Optimización inteligente de operaciones marítimas mediante IA, datos satelitales en tiempo real, IoT y 5G para máxima eficiencia, seguridad y rentabilidad.</p>
+                <p class="hero-subtitle">Resultados de programas piloto: hasta 35% de ahorro en costos operativos y 40% de reducción en emisiones de carbono.</p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn-enterprise"><i class="fas fa-play-circle"></i> Ver Demo Interactiva</a>
+                    <a href="#contact-section" class="btn-enterprise btn-outline-white"><i class="fas fa-calendar-check"></i> Agendar una Reunión</a>
+                </div>
             </div>
-            <h1>Revolucionamos la Logística Marítima con Tecnología de Vanguardia</h1>
-            <p>Optimización inteligente de operaciones marítimas mediante IA avanzada, datos satelitales en tiempo real, IoT y conectividad 5G para máxima eficiencia</p>
-            <p class="hero-subtitle">Ahorros verificados de hasta 35% en costos operativos and reducción de 40% en emisiones de carbono</p>
-            <div class="hero-buttons">
-                <a href="#demo" class="btn-enterprise">
-                    <i class="fas fa-play-circle"></i> Demo Interactiva
-                </a>
-                <a href="#contacto" class="btn-enterprise btn-outline-white">
-                    <i class="fas fa-calendar-check"></i> Solicitar Demo
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección de Tecnologías -->
-    <section class="tech-services section-bg" id="tecnologias">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tecnologías Integradas de Vanguardia</h2>
-                <p>Combinamos lo último en inteligencia artificial, datos satelitales, IoT y conectividad 5G para transformar la logística marítima</p>
-            </div>
-            
-            <div class="tech-grid">
-                <div class="tech-card satellite">
-                    <div class="tech-icon">
-                        <i class="fas fa-satellite-dish"></i>
-                    </div>
-                    <h3>Datos Satelitales</h3>
-                    <p>Integración con APIs de satélites para monitoreo en tiempo real de condiciones oceánicas y meteorológicas</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check-circle"></i> Datos de Copernicus Sentinel</li>
-                        <li><i class="fas fa-check-circle"></i> Imágenes de alta resolución</li>
-                        <li><i class="fas fa-check-circle"></i> Monitoreo de corrientes marinas</li>
-                        <li><i class="fas fa-check-circle"></i> Pronóstico meteorológico avanzado</li>
-                    </ul>
-                </div>
-                
-                <div class="tech-card iot">
-                    <div class="tech-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>Internet de las Cosas</h3>
-                    <p>Sensores IoT para monitoreo en tiempo real de condiciones de buques, carga y variables ambientales</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check-circle"></i> Sensores de temperatura y humedad</li>
-                        <li><i class="fas fa-check-circle"></i> Monitoreo de combustible</li>
-                        <li><i class="fas fa-check-circle"></i> Seguimiento de carga en tiempo real</li>
-                        <li><i class="fas fa-check-circle"></i> Mantenimiento predictivo</li>
-                    </ul>
-                </div>
-                
-                <div class="tech-card g5">
-                    <div class="tech-icon">
-                        <i class="fas fa-tower-broadcast"></i>
-                    </div>
-                    <h3>Conectividad 5G</h3>
-                    <p>Comunicación ultrarrápida y de baja latencia para transmisión de datos en tiempo real en alta mar</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check-circle"></i> Baja latencia (<10ms)</li>
-                        <li><i class="fas fa-check-circle"></i> Alta velocidad (1Gbps+)</li>
-                        <li><i class="fas fa-check-circle"></i> Cobertura marítima extendida</li>
-                        <li><i class="fas fa-check-circle"></i> Comunicación segura</li>
-                    </ul>
-                </div>
-                
-                <div class="tech-card neural">
-                    <div class="tech-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>IA Avanzada</h3>
-                    <p>Redes neuronales profundas para análisis predictivo y optimización inteligente de operaciones</p>
-                    <ul class="tech-features">
-                        <li><i class="fas fa-check-circle"></i> Redes neuronales convolucionales</li>
-                        <li><i class="fas fa-check-circle"></i> Aprendizaje por refuerzo</li>
-                        <li><i class="fas fa-check-circle"></i> Optimización multiobjetivo</li>
-                        <li><i class="fas fa-check-circle"></i> Análisis predictivo avanzado</li>
-                    </ul>
+        <!-- Sección de Prueba Social (NUEVA) -->
+        <section class="social-proof">
+            <div class="container">
+                <h3>CON LA CONFIANZA DE LÍDERES GLOBALES EN LA INDUSTRIA MARÍTIMA</h3>
+                <div class="logos-container">
+                    <img class="client-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiPkh5ZHJvU2hpcDwvdGV4dD48L3N2Zz4=" alt="HydroShip Logo">
+                    <img class="client-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiPk9jZWFuV2F2ZTwvdGV4dD48L3N2Zz4=" alt="OceanWave Logo">
+                    <img class="client-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiPk1hcml0aW1vPC90ZXh0Pjwvc3ZnPg==" alt="Maritimo Logo">
+                    <img class="client-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiPlBvcnRUb3duPC90ZXh0Pjwvc3ZnPg==" alt="PortTown Logo">
+                    <img class="client-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiPlNlYUxvZ2lzdGljczwvdGV4dD48L3N2Zz4=" alt="SeaLogistics Logo">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección de Soluciones -->
-    <section class="solutions" id="soluciones">
-        <div class="container">
-            <div class="section-title">
-                <h2>Soluciones Integrales para Operaciones Marítimas</h2>
-                <p>Nuestra plataforma enterprise ofrece herramientas avanzadas para optimizar cada aspecto de la logística marítima</p>
-            </div>
-            
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <i class="fas fa-route"></i>
-                    <h3>Optimización Inteligente de Rutas</h3>
-                    <p>Algoritmos de IA que analizan en tiempo real condiciones climáticas, corrientes marinas y tráfico para maximizar la eficiencia de rutas</p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">26.8%</div>
-                            <div class="stat-label">Ahorro combustible</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">99.9%</div>
-                            <div class="stat-label">Precisión</div>
-                        </div>
-                    </div>
+        <!-- Sección de Tecnologías -->
+        <section class="tech-services section-bg" id="tecnologias">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Tecnologías Integradas de Vanguardia</h2>
+                    <p>Nuestra plataforma fusiona cuatro pilares tecnológicos para ofrecer una solución sin precedentes en la industria marítima.</p>
                 </div>
-                
-                <div class="dashboard-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Mantenimiento Predictivo</h3>
-                    <p>Sistema de IA que anticipa fallos en motores y componentes con hasta 12 meses de anticipación</p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">97%</div>
-                            <div class="stat-label">Precisión predictiva</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">52%</div>
-                            <div class="stat-label">Reducción mantenimiento</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Monetización de Carbono</h3>
-                    <p>Plataforma blockchain integrada para la generación y comercialización de créditos de carbono</p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">$4.8M</div>
-                            <div class="stat-label">Ingresos potenciales</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">38%</div>
-                            <div class="stat-label">Reducción emisiones</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <i class="fas fa-ship"></i>
-                    <h3>Gestión de Flotas</h3>
-                    <p>Sistema integral para monitoreo y optimización de flotas marítimas en tiempo real</p>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">24/7</div>
-                            <div class="stat-label">Monitoreo</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">19.7%</div>
-                            <div class="stat-label">Optimización tiempo</div>
-                        </div>
-                    </div>
+                <div class="tech-grid">
+                    <!-- Las tarjetas de tecnología se generarán dinámicamente -->
                 </div>
             </div>
+        </section>
 
-            <!-- Gráfico en tiempo real -->
-            <div class="realtime-chart">
-                <h3>Rendimiento en Tiempo Real - Flota Global</h3>
-                <div class="chart-container">
-                    <canvas id="performance-chart"></canvas>
+        <!-- Sección de Soluciones -->
+        <section class="solutions" id="soluciones">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Soluciones Integrales para la Flota del Futuro</h2>
+                    <p>Transformamos datos en decisiones rentables, seguras y sostenibles para cada aspecto de sus operaciones marítimas.</p>
+                </div>
+                <div class="dashboard-grid">
+                    <!-- Las tarjetas de soluciones se generarán dinámicamente -->
+                </div>
+                <div class="realtime-chart">
+                    <h3>Rendimiento Agregado en Tiempo Real - Flota Global</h3>
+                    <div class="chart-container"><canvas id="performance-chart"></canvas></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Demo Interactiva -->
-    <section class="demo section-bg" id="demo">
-        <div class="container">
-            <div class="section-title">
-                <h2>Demo Interactiva - Simulador de Rutas</h2>
-                <p>Experimente el poder de nuestra plataforma con este simulador de optimización de rutas marítimas</p>
-            </div>
-            
-            <div class="demo-container">
-                <div class="demo-controls">
-                    <div class="control-group">
-                        <label for="route-select"><i class="fas fa-route"></i> Ruta Marítima</label>
-                        <select id="route-select">
-                            <option value="asia-europe">Asia - Europa (Singapur a Róterdam)</option>
-                            <option value="america-europe">América - Europa (Nueva York a Hamburgo)</option>
-                            <option value="asia-america">Asia - América (Shanghái a Los Ángeles)</option>
-                            <option value="transpacific">Transpacífico (Tokio a San Francisco)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="vessel-type"><i class="fas fa-ship"></i> Tipo de Buque</label>
-                        <select id="vessel-type">
-                            <option value="container">Portacontenedores</option>
-                            <option value="bulk">Granelero</option>
-                            <option value="tanker">Petrolero</option>
-                            <option value="lng">Metanero (LNG)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="weather-conditions"><i class="fas fa-cloud-sun"></i> Condiciones Climáticas</label>
-                        <select id="weather-conditions">
-                            <option value="optimal">Óptimas</option>
-                            <option value="moderate">Moderadas</option>
-                            <option value="adverse">Adversas</option>
-                            <option value="storm">Tormenta</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="cargo-load"><i class="fas fa-boxes"></i> Optimización de Carga (%)</label>
-                        <input type="range" id="cargo-load" min="60" max="100" value="95">
-                        <span id="cargo-value">95%</span>
-                    </div>
+        <!-- Demo Interactiva -->
+        <section class="demo section-bg" id="demo">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Demo Interactiva - Simulador de Optimización</h2>
+                    <p>Experimente el poder de nuestra IA. Configure los parámetros y observe cómo Nautilus AI optimiza la ruta en tiempo real.</p>
                 </div>
-                
-                <div class="map-controls">
-                    <button class="map-layer-btn active" data-layer="osm">
-                        <i class="fas fa-map"></i> OpenStreetMap
-                    </button>
-                    <button class="map-layer-btn" data-layer="satellite">
-                        <i class="fas fa-satellite"></i> Satélite
-                    </button>
-                    <button class="map-layer-btn" data-layer="traffic">
-                        <i class="fas fa-ship"></i> Tráfico Marítimo
-                    </button>
-                    <button class="map-layer-btn" data-layer="weather">
-                        <i class="fas fa-cloud-sun-rain"></i> Meteorología
-                    </button>
-                    <button class="map-layer-btn" data-layer="currents">
-                        <i class="fas fa-water"></i> Corrientes
-                    </button>
-                </div>
-                
-                <div class="map-container">
-                    <div id="demo-map"></div>
-                </div>
-                
-                <div class="tech-controls">
-                    <button class="tech-toggle" id="toggle-satellite">
-                        <i class="fas fa-satellite"></i> Vista Satelital
-                    </button>
-                    <button class="tech-toggle iot" id="toggle-iot">
-                        <i class="fas fa-sensor"></i> Sensores IoT
-                    </button>
-                    <button class="tech-toggle g5" id="toggle-5g">
-                        <i class="fas fa-tower-cell"></i> Conectividad 5G
-                    </button>
-                </div>
-                
-                <button class="btn-enterprise" id="calculate-btn">
-                    <i class="fas fa-calculator"></i> Calcular Optimización
-                </button>
-                
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-value" id="fuel-saving">26.8%</div>
-                        <div class="result-label">Ahorro de Combustible</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-value" id="emission-reduction">32.5%</div>
-                        <div class="result-label">Reducción de Emisiones</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-value" id="time-optimization">19.7%</div>
-                        <div class="result-label">Optimización de Tiempo</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-value" id="carbon-value">$68,500</div>
-                        <div class="result-label">Valor Créditos Carbono</div>
-                    </div>
+                <div class="demo-container">
+                    <!-- Contenido de la demo se generará dinámicamente -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Nueva sección de testimonios -->
-    <section class="testimonials" id="testimonios">
-        <div class="container">
-            <div class="section-title">
-                <h2>Testimonios de Clientes</h2>
-                <p>Descubre lo que nuestros clientes dicen sobre nuestra plataforma</p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "La implementación de Nautilus AI ha transformado por completo nuestras operaciones logísticas. Hemos reducido nuestros costos de combustible en un 28% y mejorado la precisión de nuestras entregas."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JC</div>
-                        <div class="author-info">
-                            <h4>Juan Carlos Rodríguez</h4>
-                            <p>Director de Operaciones, Naviera Global</p>
-                        </div>
-                    </div>
+        <!-- Testimonios -->
+        <section class="testimonials" id="testimonios">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Lo Que Dicen Nuestros Clientes</h2>
+                    <p>Descubra el impacto real de Nautilus AI a través de las experiencias de quienes lideran la transformación marítima.</p>
                 </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "El sistema predictivo de mantenimiento nos ha ahorrado miles en reparaciones no planizadas. La capacidad de anticipar fallos con meses de antelación es invaluable para nuestra flota."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MG</div>
-                        <div class="author-info">
-                            <h4>María González</h4>
-                            <p>Gerente de Flota, Transportes Marítimos SA</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        "La integración de datos satelitales en tiempo real con IA ha elevado nuestros estándares de seguridad y eficiencia. Una plataforma realmente revolucionaria para el sector marítimo."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AL</div>
-                        <div class="author-info">
-                            <h4>Antonio López</h4>
-                            <p>CEO, Logística Oceánica Internacional</p>
-                        </div>
-                    </div>
+                <div class="testimonials-grid">
+                    <!-- Los testimonios se generarán dinámicamente -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Sección de Contacto Mejorada (NUEVA) -->
+        <section id="contact-section" class="section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Inicie su Transformación Digital Hoy</h2>
+                    <p>Contáctenos para una demostración personalizada y descubra cómo Nautilus AI puede redefinir la eficiencia de su flota.</p>
+                </div>
+                <div class="contact-form-container">
+                    <form id="contact-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Corporativo</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Compañía</label>
+                                <input type="text" id="company" name="company" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fleet-size">Tamaño de la Flota</label>
+                                <input type="number" id="fleet-size" name="fleet-size" placeholder="Ej: 50">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="message">¿Cómo podemos ayudarle?</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-enterprise" style="width: 100%; margin-top: 20px;">
+                            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="enterprise-footer" id="contacto">
+    <footer class="enterprise-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Nautilus AI Enterprise</h3>
-                    <p>Plataforma líder de optimización marítima con inteligencia artificial, datos satelitales, IoT y conectividad 5G para operaciones de clase mundial.</p>
+                    <p>Liderando la optimización marítima con inteligencia artificial, datos satelitales, IoT y conectividad 5G para operaciones de clase mundial.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><a href="mailto:enterprise@nautilus-ai.com"><i class="fas fa-envelope"></i> enterprise@nautilus-ai.com</a></li>
-                        <li><a href="tel:+5350600275"><i class="fas fa-phone"></i> +53 5 060 0275</a></li>
-                        <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Enterprise</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> República Dominicana, HQ</a></li>
-                    </ul>
-                </div>
-                
                 <div class="footer-column">
                     <h3>Soluciones</h3>
                     <ul>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Optimización de Flotas</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Mantenimiento Predictivo</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Monetización de Carbono</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Datos Satelitales</a></li>
+                        <li><a href="#soluciones"><i class="fas fa-arrow-right"></i> Optimización de Flotas</a></li>
+                        <li><a href="#soluciones"><i class="fas fa-arrow-right"></i> Mantenimiento Predictivo</a></li>
+                        <li><a href="#soluciones"><i class="fas fa-arrow-right"></i> Monetización de Carbono</a></li>
+                        <li><a href="#tecnologias"><i class="fas fa-arrow-right"></i> Datos Satelitales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal y Contacto</h3>
+                    <ul>
+                        <li><a href="/privacy-policy.html" target="_blank"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                        <li><a href="/terms-of-service.html" target="_blank"><i class="fas fa-file-contract"></i> Términos de Servicio</a></li>
+                        <li><a href="mailto:enterprise@nautilus-ai.com"><i class="fas fa-envelope"></i> enterprise@nautilus-ai.com</a></li>
+                        <li><a href="tel:+5350600275"><i class="fas fa-phone"></i> +53 5 060 0275</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2025 Nautilus AI Enterprise. Todos los derechos reservados.</p>
+                <p>&copy; <span id="current-year">2025</span> Nautilus AI Enterprise. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1787,7 +1610,7 @@
         <span id="notification-text">Operación completada con éxito</span>
     </div>
 
-    <!-- Scripts cargados de forma asíncrona para mejor rendimiento -->
+    <!-- Scripts externos cargados de forma asíncrona -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js" async></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js" async></script>
@@ -1795,6 +1618,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" async></script>
 
+    <!-- Script principal -->
     <script>
         // Clase principal para gestionar la plataforma Nautilus AI
         class NautilusPlatform {
@@ -1806,23 +1630,19 @@
                 this.performanceChart = null;
                 this.isDarkMode = false;
                 this.simulationInterval = null;
-                this.loadedResources = 0;
-                this.totalResources = 5; // Número de recursos externos
             }
 
             // Inicializar la plataforma
             async init() {
-                // Iniciar la carga progresiva
                 this.startProgressiveLoading();
-                
-                // Cargar recursos críticos primero
                 await this.loadCriticalResources();
                 
-                // Inicializar componentes esenciales
                 this.setupNavigation();
                 this.setupThemeToggle();
                 this.setupPersonalizationPanel();
                 this.setupLogoUpload();
+                this.setupContactForm();
+                this.updateCopyrightYear();
                 
                 // Inicializar componentes no críticos después de la carga
                 setTimeout(() => {
@@ -1831,6 +1651,7 @@
                     this.initParticles();
                     this.startRealTimeSimulation();
                     this.setupAutoAnimations();
+                    this.generateDynamicContent();
                 }, 100);
             }
 
@@ -2829,6 +2650,7 @@
                         if (entry.isIntersecting) {
                             entry.target.style.opacity = '1';
                             entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, observerOptions);
@@ -2840,6 +2662,295 @@
                     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                     observer.observe(el);
                 });
+            }
+
+            // Configurar formulario de contacto (NUEVO)
+            setupContactForm() {
+                const form = document.getElementById('contact-form');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // --- EN PRODUCCIÓN ---
+                    // const formData = new FormData(form);
+                    // fetch('/api/contact', { method: 'POST', body: formData }).then(response => { ... });
+                    // --- FIN DE LÓGICA DE PRODUCCIÓN ---
+
+                    // IMPLEMENTACIÓN DE SIMULACIÓN PARA DEMO
+                    this.showNotification('Gracias por su interés. Un especialista se pondrá en contacto.');
+                    form.reset();
+                });
+            }
+
+            // Actualizar dinámicamente el año de copyright (NUEVO)
+            updateCopyrightYear() {
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            }
+
+            // Generar contenido dinámico para las secciones (NUEVO)
+            generateDynamicContent() {
+                // Generar tarjetas de tecnología
+                const techGrid = document.querySelector('.tech-grid');
+                const technologies = [
+                    {
+                        type: 'satellite',
+                        icon: 'fas fa-satellite-dish',
+                        title: 'Datos Satelitales',
+                        description: 'Integración con APIs de satélites para monitoreo en tiempo real de condiciones oceánicas y meteorológicas.',
+                        features: [
+                            'Datos de Copernicus Sentinel',
+                            'Imágenes de alta resolución',
+                            'Monitoreo de corrientes marinas',
+                            'Pronóstico meteorológico avanzado'
+                        ]
+                    },
+                    {
+                        type: 'iot',
+                        icon: 'fas fa-microchip',
+                        title: 'Internet de las Cosas',
+                        description: 'Sensores IoT para monitoreo en tiempo real de condiciones de buques, carga y variables ambientales.',
+                        features: [
+                            'Sensores de temperatura y humedad',
+                            'Monitoreo de combustible',
+                            'Seguimiento de carga en tiempo real',
+                            'Mantenimiento predictivo'
+                        ]
+                    },
+                    {
+                        type: 'g5',
+                        icon: 'fas fa-tower-broadcast',
+                        title: 'Conectividad 5G',
+                        description: 'Comunicación ultrarrápida y de baja latencia para transmisión de datos en tiempo real en alta mar.',
+                        features: [
+                            'Baja latencia (<10ms)',
+                            'Alta velocidad (1Gbps+)',
+                            'Cobertura marítima extendida',
+                            'Comunicación segura'
+                        ]
+                    },
+                    {
+                        type: 'neural',
+                        icon: 'fas fa-robot',
+                        title: 'IA Avanzada',
+                        description: 'Redes neuronales profundas para análisis predictivo y optimización inteligente de operaciones.',
+                        features: [
+                            'Redes neuronales convolucionales',
+                            'Aprendizaje por refuerzo',
+                            'Optimización multiobjetivo',
+                            'Análisis predictivo avanzado'
+                        ]
+                    }
+                ];
+
+                technologies.forEach(tech => {
+                    const techCard = document.createElement('div');
+                    techCard.className = `tech-card ${tech.type}`;
+                    techCard.innerHTML = `
+                        <div class="tech-icon"><i class="${tech.icon}"></i></div>
+                        <h3>${tech.title}</h3>
+                        <p>${tech.description}</p>
+                        <ul class="tech-features">
+                            ${tech.features.map(feature => `<li><i class="fas fa-check-circle"></i> ${feature}</li>`).join('')}
+                        </ul>
+                    `;
+                    techGrid.appendChild(techCard);
+                });
+
+                // Generar tarjetas de soluciones
+                const solutionsGrid = document.querySelector('.dashboard-grid');
+                const solutions = [
+                    {
+                        icon: 'fas fa-route',
+                        title: 'Optimización Inteligente de Rutas',
+                        description: 'Algoritmos de IA que analizan en tiempo real condiciones climáticas, corrientes marinas y tráfico para maximizar la eficiencia de rutas.',
+                        stats: [
+                            { value: '26.8%', label: 'Ahorro combustible' },
+                            { value: '99.9%', label: 'Precisión' }
+                        ]
+                    },
+                    {
+                        icon: 'fas fa-tools',
+                        title: 'Mantenimiento Predictivo',
+                        description: 'Sistema de IA que anticipa fallos en motores y componentes con hasta 12 meses de anticipación.',
+                        stats: [
+                            { value: '97%', label: 'Precisión predictiva' },
+                            { value: '52%', label: 'Reducción mantenimiento' }
+                        ]
+                    },
+                    {
+                        icon: 'fas fa-leaf',
+                        title: 'Monetización de Carbono',
+                        description: 'Plataforma blockchain integrada para la generación y comercialización de créditos de carbono.',
+                        stats: [
+                            { value: '$4.8M', label: 'Ingresos potenciales' },
+                            { value: '38%', label: 'Reducción emisiones' }
+                        ]
+                    },
+                    {
+                        icon: 'fas fa-ship',
+                        title: 'Gestión de Flotas',
+                        description: 'Sistema integral para monitoreo y optimización de flotas marítimas en tiempo real.',
+                        stats: [
+                            { value: '24/7', label: 'Monitoreo' },
+                            { value: '19.7%', label: 'Optimización tiempo' }
+                        ]
+                    }
+                ];
+
+                solutions.forEach(solution => {
+                    const solutionCard = document.createElement('div');
+                    solutionCard.className = 'dashboard-card';
+                    solutionCard.innerHTML = `
+                        <i class="${solution.icon}"></i>
+                        <h3>${solution.title}</h3>
+                        <p>${solution.description}</p>
+                        <div class="stats-grid">
+                            ${solution.stats.map(stat => `
+                                <div class="stat-item">
+                                    <div class="stat-value">${stat.value}</div>
+                                    <div class="stat-label">${stat.label}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    solutionsGrid.appendChild(solutionCard);
+                });
+
+                // Generar testimonios
+                const testimonialsGrid = document.querySelector('.testimonials-grid');
+                const testimonials = [
+                    {
+                        content: 'La implementación de Nautilus AI ha transformado por completo nuestras operaciones logísticas. Hemos reducido nuestros costos de combustible en un 28% y mejorado la precisión de nuestras entregas.',
+                        author: 'Juan Carlos Rodríguez',
+                        position: 'Director de Operaciones, Naviera Global',
+                        initials: 'JC'
+                    },
+                    {
+                        content: 'El sistema predictivo de mantenimiento nos ha ahorrado miles en reparaciones no planizadas. La capacidad de anticipar fallos con meses de antelación es invaluable para nuestra flota.',
+                        author: 'María González',
+                        position: 'Gerente de Flota, Transportes Marítimos SA',
+                        initials: 'MG'
+                    },
+                    {
+                        content: 'La integración de datos satelitales en tiempo real con IA ha elevado nuestros estándares de seguridad y eficiencia. Una plataforma realmente revolucionaria para el sector marítimo.',
+                        author: 'Antonio López',
+                        position: 'CEO, Logística Oceánica Internacional',
+                        initials: 'AL'
+                    }
+                ];
+
+                testimonials.forEach(testimonial => {
+                    const testimonialCard = document.createElement('div');
+                    testimonialCard.className = 'testimonial-card';
+                    testimonialCard.innerHTML = `
+                        <div class="testimonial-content">${testimonial.content}</div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">${testimonial.initials}</div>
+                            <div class="author-info">
+                                <h4>${testimonial.author}</h4>
+                                <p>${testimonial.position}</p>
+                            </div>
+                        </div>
+                    `;
+                    testimonialsGrid.appendChild(testimonialCard);
+                });
+
+                // Generar controles de demo
+                const demoContainer = document.querySelector('.demo-container');
+                demoContainer.innerHTML = `
+                    <div class="demo-controls">
+                        <div class="control-group">
+                            <label for="route-select"><i class="fas fa-route"></i> Ruta Marítima</label>
+                            <select id="route-select">
+                                <option value="asia-europe">Asia - Europa (Singapur a Róterdam)</option>
+                                <option value="america-europe">América - Europa (Nueva York a Hamburgo)</option>
+                                <option value="asia-america">Asia - América (Shanghái a Los Ángeles)</option>
+                                <option value="transpacific">Transpacífico (Tokio a San Francisco)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="vessel-type"><i class="fas fa-ship"></i> Tipo de Buque</label>
+                            <select id="vessel-type">
+                                <option value="container">Portacontenedores</option>
+                                <option value="bulk">Granelero</option>
+                                <option value="tanker">Petrolero</option>
+                                <option value="lng">Metanero (LNG)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="weather-conditions"><i class="fas fa-cloud-sun"></i> Condiciones Climáticas</label>
+                            <select id="weather-conditions">
+                                <option value="optimal">Óptimas</option>
+                                <option value="moderate">Moderadas</option>
+                                <option value="adverse">Adversas</option>
+                                <option value="storm">Tormenta</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="cargo-load"><i class="fas fa-boxes"></i> Optimización de Carga (%)</label>
+                            <input type="range" id="cargo-load" min="60" max="100" value="95">
+                            <span id="cargo-value">95%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="map-controls">
+                        <button class="map-layer-btn active" data-layer="osm">
+                            <i class="fas fa-map"></i> OpenStreetMap
+                        </button>
+                        <button class="map-layer-btn" data-layer="satellite">
+                            <i class="fas fa-satellite"></i> Satélite
+                        </button>
+                        <button class="map-layer-btn" data-layer="traffic">
+                            <i class="fas fa-ship"></i> Tráfico Marítimo
+                        </button>
+                        <button class="map-layer-btn" data-layer="weather">
+                            <i class="fas fa-cloud-sun-rain"></i> Meteorología
+                        </button>
+                        <button class="map-layer-btn" data-layer="currents">
+                            <i class="fas fa-water"></i> Corrientes
+                        </button>
+                    </div>
+                    
+                    <div class="map-container">
+                        <div id="demo-map"></div>
+                    </div>
+                    
+                    <div class="tech-controls">
+                        <button class="tech-toggle" id="toggle-satellite">
+                            <i class="fas fa-satellite"></i> Vista Satelital
+                        </button>
+                        <button class="tech-toggle iot" id="toggle-iot">
+                            <i class="fas fa-sensor"></i> Sensores IoT
+                        </button>
+                        <button class="tech-toggle g5" id="toggle-5g">
+                            <i class="fas fa-tower-cell"></i> Conectividad 5G
+                        </button>
+                    </div>
+                    
+                    <button class="btn-enterprise" id="calculate-btn">
+                        <i class="fas fa-calculator"></i> Calcular Optimización
+                    </button>
+                    
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-value" id="fuel-saving">26.8%</div>
+                            <div class="result-label">Ahorro de Combustible</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="emission-reduction">32.5%</div>
+                            <div class="result-label">Reducción de Emisiones</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="time-optimization">19.7%</div>
+                            <div class="result-label">Optimización de Tiempo</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="carbon-value">$68,500</div>
+                            <div class="result-label">Valor Créditos Carbono</div>
+                        </div>
+                    </div>
+                `;
             }
 
             // Limpiar recursos al cerrar
