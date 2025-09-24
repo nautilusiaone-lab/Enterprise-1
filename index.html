@@ -28,6 +28,7 @@
             --gradient-iot: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             --gradient-5g: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
             --gradient-neural: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
+            --gradient-carbon: linear-gradient(135deg, #10b981 0%, #047857 100%);
             --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         }
@@ -233,12 +234,23 @@
             box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
         }
 
+        .btn-success {
+            background: var(--gradient-carbon);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
         /* Hero Section */
         .hero {
             padding: 100px 5%;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
 
         .hero h1 {
@@ -264,44 +276,54 @@
             margin-bottom: 50px;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .floating-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
         }
 
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+            width: 150px;
+            height: 150px;
         }
 
-        .satellite { color: var(--primary); }
-        .ai { color: var(--success); }
-        .iot { color: var(--warning); }
-        .network { color: var(--danger); }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .floating-element:nth-child(3) {
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 2s;
+            width: 80px;
+            height: 80px;
         }
 
-        /* Nueva Sección: Análisis Histórico Oceánico */
-        .historical-analysis {
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Features Section */
+        .features {
             padding: 100px 5%;
             background: rgba(0, 0, 0, 0.2);
         }
@@ -327,6 +349,58 @@
             line-height: 1.6;
         }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-satellite);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-3xl);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            background: var(--gradient-satellite);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Análisis Histórico Section */
+        .historical-analysis {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
         .analysis-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -337,9 +411,10 @@
 
         .analysis-controls {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 30px;
             border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
 
         .control-group {
@@ -379,9 +454,10 @@
 
         .analysis-results {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 30px;
             border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
 
         .results-header {
@@ -473,6 +549,292 @@
             color: var(--primary);
         }
 
+        /* Carbon Credits Section */
+        .carbon-credits {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .carbon-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .carbon-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .carbon-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .carbon-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .carbon-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--success);
+        }
+
+        .carbon-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            background: var(--gradient-carbon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .dashboard-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .dashboard-card.large {
+            grid-column: 1 / -1;
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-header {
+            margin-bottom: 30px;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            background: var(--gradient-satellite);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-features li i {
+            color: var(--success);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 80px;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-satellite);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 5%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
@@ -545,12 +907,16 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .analysis-container {
+            .analysis-container, .dashboard-grid {
                 grid-template-columns: 1fr;
             }
             
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-main {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -568,16 +934,20 @@
                 display: none;
             }
             
-            .results-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .benefits-grid {
+            .results-stats, .benefits-grid {
                 grid-template-columns: 1fr;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
             }
         }
     </style>
@@ -606,6 +976,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#caracteristicas">Características</a></li>
                 <li><a href="#analisis-historico">Análisis Histórico</a></li>
+                <li><a href="#carbon-credits">Créditos de Carbono</a></li>
                 <li><a href="#precios">Precios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -618,38 +989,62 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
         <h1>Plataforma Avanzada con IA, Satélite, IoT y 5G</h1>
-        <p>Nautilus AI Enterprise combina tecnologías de vanguardia para ofrecer la solución más completa en navegación marítima inteligente, con capacidades únicas de análisis histórico oceánico.</p>
+        <p>Nautilus AI Enterprise combina tecnologías de vanguardia para ofrecer la solución más completa en navegación marítima inteligente, con capacidades únicas de análisis histórico oceánico y monetización de créditos de carbono.</p>
         <div class="hero-buttons">
             <button class="btn btn-primary">Comenzar Demo</button>
             <button class="btn btn-outline">Ver Características</button>
+            <button class="btn btn-success">Calculadora de Carbono</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="caracteristicas">
+        <div class="section-header">
+            <h2>Características Exclusivas</h2>
+            <p>Descubre cómo Nautilus AI Enterprise supera a la competencia con funcionalidades únicas en el mercado</p>
         </div>
         
         <div class="features-grid">
             <div class="feature-card">
-                <i class="fas fa-satellite feature-icon satellite"></i>
-                <h3>Datos Satelitales</h3>
-                <p>Acceso a datos en tiempo real y históricos de múltiples fuentes satelitales.</p>
+                <i class="fas fa-chart-line feature-icon"></i>
+                <h3>Análisis Histórico Oceánico</h3>
+                <p>Combina datos históricos satelitales con IA predictiva para recrear condiciones oceánicas pasadas y optimizar rutas.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-brain feature-icon ai"></i>
-                <h3>IA Predictiva</h3>
-                <p>Algoritmos avanzados de inteligencia artificial para pronósticos precisos.</p>
+                <i class="fas fa-leaf feature-icon"></i>
+                <h3>Monetización de Créditos de Carbono</h3>
+                <p>Calcula, verifica y monetiza créditos de carbono basados en reducciones de emisiones de tus operaciones marítimas.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-sensor feature-icon iot"></i>
-                <h3>IoT Marino</h3>
-                <p>Integración con sensores y dispositivos IoT para monitoreo en tiempo real.</p>
+                <i class="fas fa-brain feature-icon"></i>
+                <h3>IA Predictiva Avanzada</h3>
+                <p>Algoritmos de machine learning que pronostican condiciones oceánicas con 99.7% de precisión.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-tower-broadcast feature-icon network"></i>
-                <h3>Conectividad 5G</h3>
-                <p>Comunicación ultrarrápida y confiable incluso en alta mar.</p>
+                <i class="fas fa-satellite feature-icon"></i>
+                <h3>Datos Satelitales en Tiempo Real</h3>
+                <p>Integración con múltiples fuentes satelitales para monitoreo en tiempo real de condiciones oceánicas.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-broadcast-tower feature-icon"></i>
+                <h3>Conectividad 5G Avanzada</h3>
+                <p>Comunicación ultrarrápida y confiable incluso en las zonas más remotas del océano.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Seguridad y Cumplimiento</h3>
+                <p>Sistema de seguridad empresarial con cumplimiento de regulaciones internacionales marítimas.</p>
             </div>
         </div>
     </section>
 
-    <!-- Nueva Sección: Análisis Histórico Oceánico -->
+    <!-- Análisis Histórico Section -->
     <section class="historical-analysis" id="analisis-historico">
         <div class="section-header">
             <h2>Análisis Histórico Oceánico con IA</h2>
@@ -776,6 +1171,241 @@
         </div>
     </section>
 
+    <!-- Carbon Credits Section -->
+    <section class="carbon-credits" id="carbon-credits">
+        <div class="section-header">
+            <h2>Monetización de Créditos de Carbono</h2>
+            <p>Convierte tus operaciones eficientes en ingresos adicionales mediante la generación y venta de créditos de carbono verificados.</p>
+        </div>
+        
+        <div class="carbon-container">
+            <div class="carbon-cards">
+                <div class="carbon-card">
+                    <i class="fas fa-co2 carbon-icon"></i>
+                    <h3>Reducción de Emisiones</h3>
+                    <p>Calcula automáticamente las reducciones de CO₂ gracias a rutas optimizadas</p>
+                    <div class="carbon-value">-17% CO₂</div>
+                </div>
+                <div class="carbon-card">
+                    <i class="fas fa-hand-holding-usd carbon-icon"></i>
+                    <h3>Generación de Ingresos</h3>
+                    <p>Convierte tus ahorros de combustible en créditos de carbono monetizables</p>
+                    <div class="carbon-value">+$120K/año</div>
+                </div>
+                <div class="carbon-card">
+                    <i class="fas fa-award carbon-icon"></i>
+                    <h3>Certificación Verificada</h3>
+                    <p>Obten certificaciones reconocidas internacionalmente para tus créditos</p>
+                    <div class="carbon-value">100% Verificado</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <div class="section-header">
+            <h2>Dashboard de Rendimiento</h2>
+            <p>Monitorea en tiempo real el rendimiento de tu flota y los beneficios obtenidos</p>
+        </div>
+        
+        <div class="dashboard-container">
+            <div class="dashboard-grid">
+                <div class="dashboard-main">
+                    <div class="dashboard-card">
+                        <h3>Eficiencia de Combustible</h3>
+                        <div class="metric">
+                            <span>Consumo Actual</span>
+                            <span class="metric-value">84.2 L/nm</span>
+                        </div>
+                        <div class="metric">
+                            <span>Objetivo Optimizado</span>
+                            <span class="metric-value">69.9 L/nm</span>
+                        </div>
+                        <div class="metric">
+                            <span>Reducción Estimada</span>
+                            <span class="metric-value" style="color: var(--success);">17%</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Créditos de Carbono</h3>
+                        <div class="metric">
+                            <span>Generados este Mes</span>
+                            <span class="metric-value">245 tCO₂e</span>
+                        </div>
+                        <div class="metric">
+                            <span>Valor Estimado</span>
+                            <span class="metric-value" style="color: var(--success);">$12,250</span>
+                        </div>
+                        <div class="metric">
+                            <span>Proyección Anual</span>
+                            <span class="metric-value">$147,000</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card large">
+                        <h3>Rendimiento de Flota</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">12</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Embarcaciones Activas</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--success);">98.3%</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Tiempo Operativo</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--warning);">$2.4M</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Ahorro Anual</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Alertas y Recomendaciones</h3>
+                    <div class="metric">
+                        <span>Ruta Subóptima Detectada</span>
+                        <span class="metric-value" style="color: var(--warning);">¡Optimizar!</span>
+                    </div>
+                    <div class="metric">
+                        <span>Condiciones Climáticas</span>
+                        <span class="metric-value" style="color: var(--success);">Favorables</span>
+                    </div>
+                    <div class="metric">
+                        <span>Mantenimiento Programado</span>
+                        <span class="metric-value">En 14 días</span>
+                    </div>
+                    <div class="metric">
+                        <span>Créditos por Vender</span>
+                        <span class="metric-value" style="color: var(--success);">125 tCO₂e</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="precios">
+        <div class="section-header">
+            <h2>Planes y Precios</h2>
+            <p>Selecciona el plan que mejor se adapte a las necesidades de tu operación marítima</p>
+        </div>
+        
+        <div class="pricing-container">
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Básico</h3>
+                        <p>Perfecto para pequeñas flotas</p>
+                    </div>
+                    <div class="pricing-price">$299<span>/mes</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Optimización de rutas básica</li>
+                        <li><i class="fas fa-check"></i> Monitoreo de 5 embarcaciones</li>
+                        <li><i class="fas fa-check"></i> Datos satelitales en tiempo real</li>
+                        <li><i class="fas fa-times"></i> Análisis histórico avanzado</li>
+                        <li><i class="fas fa-times"></i> Monetización de carbono</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width: 100%;">Seleccionar Plan</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Enterprise</h3>
+                        <p>La solución más completa</p>
+                    </div>
+                    <div class="pricing-price">$899<span>/mes</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Optimización de rutas avanzada</li>
+                        <li><i class="fas fa-check"></i> Monitoreo de flota ilimitado</li>
+                        <li><i class="fas fa-check"></i> Datos satelitales en tiempo real</li>
+                        <li><i class="fas fa-check"></i> Análisis histórico con IA</li>
+                        <li><i class="fas fa-check"></i> Monetización de carbono completa</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;">Seleccionar Plan</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Personalizado</h3>
+                        <p>Para operaciones específicas</p>
+                    </div>
+                    <div class="pricing-price">Consultar</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Soluciones a medida</li>
+                        <li><i class="fas fa-check"></i> Integraciones personalizadas</li>
+                        <li><i class="fas fa-check"></i> Soporte prioritario 24/7</li>
+                        <li><i class="fas fa-check"></i> Todas las funcionalidades Enterprise</li>
+                        <li><i class="fas fa-check"></i> Análisis de ROI detallado</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width: 100%;">Contactar Ventas</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Casos de Éxito</h2>
+            <p>Descubre cómo nuestras soluciones han transformado operaciones marítimas alrededor del mundo</p>
+        </div>
+        
+        <div class="testimonials-container">
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "La implementación de Nautilus AI nos permitió reducir nuestro consumo de combustible en un 19% y generar ingresos adicionales por créditos de carbono. El ROI fue evidente en menos de 6 meses."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>María Cortés</h4>
+                            <p>Directora de Operaciones, TransOceanic Shipping</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "El análisis histórico con IA nos dio una ventaja competitiva única. Ahora podemos planificar rutas con una precisión que nuestros competidores no pueden igualar. La inversión valió cada centavo."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h4>Robert Schmidt</h4>
+                            <p>CEO, Baltic Maritime Group</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "La monetización de créditos de carbono fue un game-changer para nuestra empresa. No solo redujimos nuestra huella ambiental, sino que creamos una nueva línea de ingresos sostenible."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Amanda Li</h4>
+                            <p>Directora de Sostenibilidad, Asia Pacific Logistics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contacto">
+        <div class="cta-container">
+            <h2>¿Listo para transformar tu operación marítima?</h2>
+            <p>Comienza hoy mismo y descubre cómo Nautilus AI puede optimizar tus rutas, reducir costos y generar nuevos ingresos mediante créditos de carbono.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Solicitar Demo Personalizada</button>
+                <button class="btn btn-outline">Descargar Whitepaper</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -794,6 +1424,7 @@
                 <ul>
                     <li><a href="#">Nautilus AI Enterprise</a></li>
                     <li><a href="#">Análisis Histórico Oceánico</a></li>
+                    <li><a href="#">Monetización de Carbono</a></li>
                     <li><a href="#">Optimización de Rutas</a></li>
                     <li><a href="#">Monitoreo en Tiempo Real</a></li>
                 </ul>
@@ -805,6 +1436,7 @@
                     <li><a href="#">Casos de Estudio</a></li>
                     <li><a href="#">Centro de Ayuda</a></li>
                     <li><a href="#">Blog</a></li>
+                    <li><a href="#">Whitepapers</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -814,6 +1446,7 @@
                     <li><a href="#">Carreras</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Soporte</a></li>
+                    <li><a href="#">Socios</a></li>
                 </ul>
             </div>
         </div>
