@@ -3,32 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nautilus AI Enterprise - Plataforma Avanzada con IA, Satélite, IoT y 5G</title>
+    <title>Oceanic AI Enterprise - Plataforma Avanzada con IA, Satélite, IoT y 5G</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
     <style>
         :root {
-            --primary: #00d4ff;
-            --secondary: #0066ff;
-            --ocean: #006994;
+            --primary: #0066cc;
+            --secondary: #004499;
+            --ocean: #005588;
             --dark: #0a0e17;
             --dark-light: #1a2536;
             --text: #e0f7ff;
             --text-secondary: #a0c0d0;
-            --success: #00ff88;
+            --success: #00cc88;
             --warning: #ffaa00;
             --danger: #ff3366;
             --card-bg: rgba(16, 22, 36, 0.8);
-            --border: rgba(0, 212, 255, 0.3);
+            --border: rgba(0, 102, 204, 0.3);
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             --gradient-enterprise: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--ocean) 100%);
             --gradient-satellite: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-iot: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            --gradient-5g: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-            --gradient-neural: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
-            --gradient-carbon: linear-gradient(135deg, #10b981 0%, #047857 100%);
             --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         }
@@ -79,17 +75,6 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 0.5s ease-out;
-        }
-
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 105, 148, 0.1) 0%, transparent 50%);
         }
 
         .modern-loader {
@@ -254,7 +239,7 @@
         }
 
         .theme-toggle:hover {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(0, 102, 204, 0.1);
         }
 
         .auth-buttons {
@@ -278,7 +263,7 @@
         }
 
         .btn-outline:hover {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(0, 102, 204, 0.1);
         }
 
         .btn-primary {
@@ -288,17 +273,17 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
         }
 
         .btn-success {
-            background: var(--gradient-carbon);
+            background: linear-gradient(135deg, #00cc88, #00994d);
             color: white;
         }
 
         .btn-success:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 204, 136, 0.4);
         }
 
         /* Hero Section */
@@ -348,7 +333,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
             animation: float 6s ease-in-out infinite;
         }
 
@@ -679,9 +664,69 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin: 20px 0;
-            background: var(--gradient-carbon);
+            background: linear-gradient(135deg, #00cc88, #00994d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .services {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .service-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li i {
+            color: var(--success);
         }
 
         /* Dashboard Section */
@@ -746,111 +791,14 @@
             font-size: 1.2rem;
         }
 
-        /* Pricing Section */
-        .pricing {
+        /* Testimonials Section */
+        .testimonials {
             padding: 100px 5%;
             background: rgba(0, 0, 0, 0.2);
         }
 
-        .light-mode .pricing {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .pricing-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .pricing-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px 30px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card.featured {
-            border: 2px solid var(--primary);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.featured::before {
-            content: 'POPULAR';
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--primary);
-            color: var(--dark);
-            padding: 5px 30px;
-            transform: rotate(45deg);
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        .light-mode .pricing-card.featured::before {
-            color: white;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .pricing-header {
-            margin-bottom: 30px;
-        }
-
-        .pricing-name {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .pricing-price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 20px 0;
-            background: var(--gradient-satellite);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .pricing-features li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pricing-features li i {
-            color: var(--success);
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            padding: 100px 5%;
-            background: rgba(0, 0, 0, 0.1);
-        }
-
         .light-mode .testimonials {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .testimonials-container {
@@ -1098,28 +1046,19 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
-            
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-            
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
-            }
         }
     </style>
 </head>
 <body>
     <!-- Loader moderno y rápido -->
     <div class="loader-container" id="loader">
-        <div class="particles" id="particles"></div>
         <div class="modern-loader">
             <div class="loader-logo"></div>
         </div>
         <div class="loader-progress">
             <div class="loader-progress-bar" id="progress-bar"></div>
         </div>
-        <div class="loader-text" id="loader-text">Inicializando Plataforma Enterprise...</div>
+        <div class="loader-text" id="loader-text">Inicializando Oceanic AI Enterprise...</div>
     </div>
 
     <!-- Canvas para partículas -->
@@ -1128,17 +1067,17 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <img src="" alt="Nautilus AI Logo" class="logo-image" id="custom-logo">
+            <img src="" alt="Oceanic AI Logo" class="logo-image" id="custom-logo">
             <i class="fas fa-satellite-dish logo-icon" id="default-logo"></i>
-            <span class="logo-text">Nautilus AI</span>
+            <span class="logo-text">Oceanic AI</span>
         </div>
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#caracteristicas">Características</a></li>
                 <li><a href="#analisis-historico">Análisis Histórico</a></li>
-                <li><a href="#carbon-credits">Créditos de Carbono</a></li>
-                <li><a href="#precios">Precios</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Casos de Éxito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -1151,7 +1090,7 @@
             </button>
             <div class="auth-buttons">
                 <button class="btn btn-outline">Iniciar Sesión</button>
-                <button class="btn btn-primary">Registro Gratuito</button>
+                <button class="btn btn-primary">Contactar</button>
             </div>
         </div>
     </header>
@@ -1176,12 +1115,12 @@
             <div class="floating-element"></div>
             <div class="floating-element"></div>
         </div>
-        <h1>Plataforma Avanzada con IA, Satélite, IoT y 5G</h1>
-        <p>Nautilus AI Enterprise combina tecnologías de vanguardia para ofrecer la solución más completa en navegación marítima inteligente, con capacidades únicas de análisis histórico oceánico y monetización de créditos de carbono.</p>
+        <h1>Optimización Marítima con IA Avanzada</h1>
+        <p>Oceanic AI Enterprise es la solución definitiva para empresas navieras que buscan maximizar eficiencia, reducir costos y generar ingresos adicionales mediante créditos de carbono. Combinamos datos satelitales, IoT y análisis predictivo para transformar tus operaciones marítimas.</p>
         <div class="hero-buttons">
-            <button class="btn btn-primary">Comenzar Demo</button>
-            <button class="btn btn-outline">Ver Características</button>
-            <button class="btn btn-success">Calculadora de Carbono</button>
+            <button class="btn btn-primary">Solicitar Demo Personalizada</button>
+            <button class="btn btn-outline">Ver Casos de Éxito</button>
+            <button class="btn btn-success">Calculadora de Ahorros</button>
         </div>
     </section>
 
@@ -1189,39 +1128,39 @@
     <section class="features" id="caracteristicas">
         <div class="section-header">
             <h2>Características Exclusivas</h2>
-            <p>Descubre cómo Nautilus AI Enterprise supera a la competencia con funcionalidades únicas en el mercado</p>
+            <p>Descubre cómo Oceanic AI Enterprise supera a la competencia con funcionalidades únicas en el mercado</p>
         </div>
         
         <div class="features-grid">
             <div class="feature-card">
                 <i class="fas fa-chart-line feature-icon"></i>
                 <h3>Análisis Histórico Oceánico</h3>
-                <p>Combina datos históricos satelitales con IA predictiva para recrear condiciones oceánicas pasadas y optimizar rutas.</p>
+                <p>Combina datos históricos satelitales con IA predictiva para recrear condiciones oceánicas pasadas y optimizar rutas con precisión milimétrica.</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-leaf feature-icon"></i>
                 <h3>Monetización de Créditos de Carbono</h3>
-                <p>Calcula, verifica y monetiza créditos de carbono basados en reducciones de emisiones de tus operaciones marítimas.</p>
+                <p>Calcula, verifica y monetiza créditos de carbono basados en reducciones de emisiones de tus operaciones marítimas. Nueva línea de ingresos sostenible.</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-brain feature-icon"></i>
                 <h3>IA Predictiva Avanzada</h3>
-                <p>Algoritmos de machine learning que pronostican condiciones oceánicas con 99.7% de precisión.</p>
+                <p>Algoritmos de machine learning que pronostican condiciones oceánicas con 99.7% de precisión, permitiendo decisiones estratégicas informadas.</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-satellite feature-icon"></i>
                 <h3>Datos Satelitales en Tiempo Real</h3>
-                <p>Integración con múltiples fuentes satelitales para monitoreo en tiempo real de condiciones oceánicas.</p>
+                <p>Integración con múltiples fuentes satelitales para monitoreo en tiempo real de condiciones oceánicas, clima y posición de embarcaciones.</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-broadcast-tower feature-icon"></i>
                 <h3>Conectividad 5G Avanzada</h3>
-                <p>Comunicación ultrarrápida y confiable incluso en las zonas más remotas del océano.</p>
+                <p>Comunicación ultrarrápida y confiable incluso en las zonas más remotas del océano, garantizando operaciones sin interrupciones.</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-shield-alt feature-icon"></i>
                 <h3>Seguridad y Cumplimiento</h3>
-                <p>Sistema de seguridad empresarial con cumplimiento de regulaciones internacionales marítimas.</p>
+                <p>Sistema de seguridad empresarial con cumplimiento de regulaciones internacionales marítimas y protección de datos críticos.</p>
             </div>
         </div>
     </section>
@@ -1384,6 +1323,58 @@
         </div>
     </section>
 
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <h2>Servicios Freelance</h2>
+            <p>Soluciones personalizadas para empresas navieras de todos los tamaños</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-chart-bar service-icon"></i>
+                <h3>Análisis de Rutas</h3>
+                <p>Optimización completa de rutas marítimas utilizando datos históricos y predictivos</p>
+                <div class="service-price">Desde $2,500</div>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Análisis de 5 rutas principales</li>
+                    <li><i class="fas fa-check"></i> Reporte de optimización detallado</li>
+                    <li><i class="fas fa-check"></i> Estimación de ahorros</li>
+                    <li><i class="fas fa-check"></i> Asesoría personalizada</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-leaf service-icon"></i>
+                <h3>Monetización de Carbono</h3>
+                <p>Implementación completa del sistema de créditos de carbono para tu flota</p>
+                <div class="service-price">Desde $5,000</div>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Auditoría de emisiones</li>
+                    <li><i class="fas fa-check"></i> Certificación de créditos</li>
+                    <li><i class="fas fa-check"></i> Estrategia de monetización</li>
+                    <li><i class="fas fa-check"></i> Soporte durante 6 meses</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-cogs service-icon"></i>
+                <h3>Implementación Completa</h3>
+                <p>Despliegue integral de Oceanic AI Enterprise en tu operación</p>
+                <div class="service-price">Desde $15,000</div>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Instalación y configuración</li>
+                    <li><i class="fas fa-check"></i> Capacitación del equipo</li>
+                    <li><i class="fas fa-check"></i> Integración con sistemas existentes</li>
+                    <li><i class="fas fa-check"></i> Soporte premium por 1 año</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Dashboard Section -->
     <section class="dashboard">
         <div class="section-header">
@@ -1465,74 +1456,8 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="precios">
-        <div class="section-header">
-            <h2>Planes y Precios Competitivos</h2>
-            <p>Basado en análisis de mercado, ofrecemos la mejor relación calidad-precio para operaciones marítimas</p>
-        </div>
-        
-        <div class="pricing-container">
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Essentials</h3>
-                        <p>Para pequeñas flotas y operaciones básicas</p>
-                    </div>
-                    <div class="pricing-price">$499<span>/mes</span></div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Optimización de rutas básica</li>
-                        <li><i class="fas fa-check"></i> Monitoreo de hasta 10 embarcaciones</li>
-                        <li><i class="fas fa-check"></i> Datos satelitales en tiempo real</li>
-                        <li><i class="fas fa-check"></i> Análisis de eficiencia de combustible</li>
-                        <li><i class="fas fa-times"></i> Análisis histórico avanzado</li>
-                        <li><i class="fas fa-times"></i> Monetización de carbono</li>
-                        <li><i class="fas fa-times"></i> Soporte prioritario 24/7</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;">Seleccionar Plan</button>
-                </div>
-                
-                <div class="pricing-card featured">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Enterprise</h3>
-                        <p>La solución más completa para flotas medianas y grandes</p>
-                    </div>
-                    <div class="pricing-price">$1,299<span>/mes</span></div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Optimización de rutas avanzada</li>
-                        <li><i class="fas fa-check"></i> Monitoreo de flota ilimitado</li>
-                        <li><i class="fas fa-check"></i> Datos satelitales en tiempo real</li>
-                        <li><i class="fas fa-check"></i> Análisis histórico con IA (30+ años)</li>
-                        <li><i class="fas fa-check"></i> Monetización de carbono completa</li>
-                        <li><i class="fas fa-check"></i> Dashboard avanzado de rendimiento</li>
-                        <li><i class="fas fa-check"></i> Soporte prioritario 24/7</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%;">Seleccionar Plan</button>
-                </div>
-                
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Global Fleet</h3>
-                        <p>Para operaciones globales con requisitos específicos</p>
-                    </div>
-                    <div class="pricing-price">$2,499<span>/mes</span></div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Todas las funcionalidades Enterprise</li>
-                        <li><i class="fas fa-check"></i> Integraciones personalizadas</li>
-                        <li><i class="fas fa-check"></i> API avanzada para desarrolladores</li>
-                        <li><i class="fas fa-check"></i> Análisis predictivo personalizado</li>
-                        <li><i class="fas fa-check"></i> Gestión de múltiples flotas</li>
-                        <li><i class="fas fa-check"></i> Consultoría estratégica incluida</li>
-                        <li><i class="fas fa-check"></i> Gerente de cuenta dedicado</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;">Contactar Ventas</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials" id="testimonios">
         <div class="section-header">
             <h2>Casos de Éxito</h2>
             <p>Descubre cómo nuestras soluciones han transformado operaciones marítimas alrededor del mundo</p>
@@ -1542,7 +1467,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "La implementación de Nautilus AI nos permitió reducir nuestro consumo de combustible en un 19% y generar ingresos adicionales por créditos de carbono. El ROI fue evidente en menos de 6 meses."
+                        "La implementación de Oceanic AI nos permitió reducir nuestro consumo de combustible en un 19% y generar ingresos adicionales por créditos de carbono. El ROI fue evidente en menos de 6 meses."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">MC</div>
@@ -1586,9 +1511,9 @@
     <section class="cta" id="contacto">
         <div class="cta-container">
             <h2>¿Listo para transformar tu operación marítima?</h2>
-            <p>Comienza hoy mismo y descubre cómo Nautilus AI puede optimizar tus rutas, reducir costos y generar nuevos ingresos mediante créditos de carbono.</p>
+            <p>Comienza hoy mismo y descubre cómo Oceanic AI puede optimizar tus rutas, reducir costos y generar nuevos ingresos mediante créditos de carbono.</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary">Solicitar Demo Personalizada</button>
+                <button class="btn btn-primary">Solicitar Consultoría Gratuita</button>
                 <button class="btn btn-outline">Descargar Whitepaper</button>
             </div>
         </div>
@@ -1598,7 +1523,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h3>Nautilus AI</h3>
+                <h3>Oceanic AI</h3>
                 <p>La plataforma más avanzada para navegación marítima inteligente, ofreciendo un valor que ninguna competencia puede igualar.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1608,13 +1533,13 @@
                 </div>
             </div>
             <div class="footer-column">
-                <h3>Productos</h3>
+                <h3>Servicios</h3>
                 <ul>
-                    <li><a href="#">Nautilus AI Enterprise</a></li>
-                    <li><a href="#">Análisis Histórico Oceánico</a></li>
+                    <li><a href="#">Análisis de Rutas</a></li>
                     <li><a href="#">Monetización de Carbono</a></li>
-                    <li><a href="#">Optimización de Rutas</a></li>
-                    <li><a href="#">Monitoreo en Tiempo Real</a></li>
+                    <li><a href="#">Implementación Completa</a></li>
+                    <li><a href="#">Consultoría Estratégica</a></li>
+                    <li><a href="#">Soporte Técnico</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -1639,7 +1564,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 Nautilus AI Enterprise. Todos los derechos reservados.</p>
+            <p>&copy; 2023 Oceanic AI Enterprise. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -1790,8 +1715,8 @@
             ];
             
             // Añadir rutas al mapa
-            L.polyline(traditionalRoute, {color: '#00d4ff', weight: 4, opacity: 0.7}).addTo(map);
-            L.polyline(optimizedRoute, {color: '#00ff88', weight: 4, opacity: 0.7}).addTo(map);
+            L.polyline(traditionalRoute, {color: '#0066cc', weight: 4, opacity: 0.7}).addTo(map);
+            L.polyline(optimizedRoute, {color: '#00cc88', weight: 4, opacity: 0.7}).addTo(map);
             
             // Añadir leyenda
             const legend = L.control({position: 'bottomright'});
@@ -1800,11 +1725,11 @@
                 div.innerHTML = `
                     <h4>Leyenda</h4>
                     <div style="display:flex;align-items:center;margin:5px 0">
-                        <div style="width:20px;height:4px;background:#00d4ff;margin-right:10px"></div>
+                        <div style="width:20px;height:4px;background:#0066cc;margin-right:10px"></div>
                         <span>Ruta Tradicional</span>
                     </div>
                     <div style="display:flex;align-items:center;margin:5px 0">
-                        <div style="width:20px;height:4px;background:#00ff88;margin-right:10px"></div>
+                        <div style="width:20px;height:4px;background:#00cc88;margin-right:10px"></div>
                         <span>Ruta Optimizada</span>
                     </div>
                 `;
