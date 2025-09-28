@@ -1159,10 +1159,6 @@
             <button class="btn btn-outline" id="upload-logo-btn">
                 <i class="fas fa-upload"></i> Logo
             </button>
-            <div class="auth-buttons">
-                <button class="btn btn-outline">Iniciar Sesión</button>
-                <button class="btn btn-primary">Contactar</button>
-            </div>
         </div>
     </header>
 
@@ -1189,9 +1185,9 @@
         <h1>Optimización Marítima con IA Avanzada</h1>
         <p>Oceanic AI Enterprise es la solución definitiva para empresas navieras que buscan maximizar eficiencia, reducir costos y generar ingresos adicionales mediante créditos de carbono. Combinamos datos satelitales, IoT y análisis predictivo para transformar tus operaciones marítimas.</p>
         <div class="hero-buttons">
-            <button class="btn btn-primary">Solicitar Demo Personalizada</button>
-            <button class="btn btn-outline">Ver Casos de Éxito</button>
-            <button class="btn btn-success">Calculadora de Ahorros</button>
+            <button class="btn btn-primary" id="btn-demo">Solicitar Demo Personalizada</button>
+            <button class="btn btn-outline" id="btn-testimonios">Ver Casos de Éxito</button>
+            <button class="btn btn-success" id="btn-calculadora">Calculadora de Ahorros</button>
         </div>
     </section>
 
@@ -1413,7 +1409,7 @@
                     <li><i class="fas fa-check"></i> Estimación de ahorros</li>
                     <li><i class="fas fa-check"></i> Asesoría personalizada</li>
                 </ul>
-                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+                <button class="btn btn-primary btn-service" style="width: 100%;">Solicitar Servicio</button>
             </div>
             
             <div class="service-card">
@@ -1427,7 +1423,7 @@
                     <li><i class="fas fa-check"></i> Estrategia de monetización</li>
                     <li><i class="fas fa-check"></i> Soporte durante 6 meses</li>
                 </ul>
-                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+                <button class="btn btn-primary btn-service" style="width: 100%;">Solicitar Servicio</button>
             </div>
             
             <div class="service-card">
@@ -1441,7 +1437,7 @@
                     <li><i class="fas fa-check"></i> Integración con sistemas existentes</li>
                     <li><i class="fas fa-check"></i> Soporte premium por 1 año</li>
                 </ul>
-                <button class="btn btn-primary" style="width: 100%;">Solicitar Servicio</button>
+                <button class="btn btn-primary btn-service" style="width: 100%;">Solicitar Servicio</button>
             </div>
         </div>
     </section>
@@ -1584,8 +1580,8 @@
             <h2>¿Listo para transformar tu operación marítima?</h2>
             <p>Comienza hoy mismo y descubre cómo Oceanic AI puede optimizar tus rutas, reducir costos y generar nuevos ingresos mediante créditos de carbono.</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary">Solicitar Consultoría Gratuita</button>
-                <button class="btn btn-outline">Descargar Whitepaper</button>
+                <button class="btn btn-primary" id="btn-consultoria">Solicitar Consultoría Gratuita</button>
+                <button class="btn btn-outline" id="btn-whitepaper">Descargar Whitepaper</button>
             </div>
         </div>
     </section>
@@ -1606,31 +1602,31 @@
             <div class="footer-column">
                 <h3>Servicios</h3>
                 <ul>
-                    <li><a href="#">Análisis de Rutas</a></li>
-                    <li><a href="#">Monetización de Carbono</a></li>
-                    <li><a href="#">Implementación Completa</a></li>
-                    <li><a href="#">Consultoría Estratégica</a></li>
-                    <li><a href="#">Soporte Técnico</a></li>
+                    <li><a href="#servicios">Análisis de Rutas</a></li>
+                    <li><a href="#servicios">Monetización de Carbono</a></li>
+                    <li><a href="#servicios">Implementación Completa</a></li>
+                    <li><a href="#caracteristicas">Consultoría Estratégica</a></li>
+                    <li><a href="#contacto">Soporte Técnico</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Recursos</h3>
                 <ul>
-                    <li><a href="#">Documentación</a></li>
-                    <li><a href="#">Casos de Estudio</a></li>
-                    <li><a href="#">Centro de Ayuda</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Whitepapers</a></li>
+                    <li><a href="#caracteristicas">Documentación</a></li>
+                    <li><a href="#testimonios">Casos de Estudio</a></li>
+                    <li><a href="#contacto">Centro de Ayuda</a></li>
+                    <li><a href="#testimonios">Blog</a></li>
+                    <li><a href="#contacto">Whitepapers</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Empresa</h3>
                 <ul>
-                    <li><a href="#">Sobre Nosotros</a></li>
-                    <li><a href="#">Carreras</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Soporte</a></li>
-                    <li><a href="#">Socios</a></li>
+                    <li><a href="#inicio">Sobre Nosotros</a></li>
+                    <li><a href="#contacto">Carreras</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#contacto">Soporte</a></li>
+                    <li><a href="#contacto">Socios</a></li>
                 </ul>
             </div>
         </div>
@@ -1739,6 +1735,35 @@
                     alert('Por favor, selecciona un archivo de imagen.');
                 }
             });
+            
+            // Configurar navegación de botones a secciones
+            document.getElementById('btn-demo').addEventListener('click', function() {
+                document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('btn-testimonios').addEventListener('click', function() {
+                document.getElementById('testimonios').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('btn-calculadora').addEventListener('click', function() {
+                document.getElementById('analisis-historico').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('btn-consultoria').addEventListener('click', function() {
+                document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('btn-whitepaper').addEventListener('click', function() {
+                alert('El whitepaper estará disponible próximamente. ¡Gracias por tu interés!');
+            });
+            
+            // Configurar botones de servicio
+            const serviceButtons = document.querySelectorAll('.btn-service');
+            serviceButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
         });
         
         function initMap() {
@@ -1749,17 +1774,6 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
-            
-            // Simular datos de corrientes oceánicas
-            const currentData = [
-                { lat: 35, lng: -45, strength: 0.8, direction: 45 },
-                { lat: 25, lng: -35, strength: 0.6, direction: 60 },
-                { lat: 15, lng: -25, strength: 0.7, direction: 30 },
-                { lat: 5, lng: -15, strength: 0.5, direction: 15 },
-                { lat: -5, lng: -5, strength: 0.9, direction: 75 },
-                { lat: 40, lng: -20, strength: 0.4, direction: 90 },
-                { lat: 30, lng: -10, strength: 0.7, direction: 120 }
-            ];
             
             // Añadir marcadores para puertos importantes
             const ports = [
